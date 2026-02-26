@@ -70,6 +70,7 @@ export class DispatchRouter {
     baseUrl = DEFAULT_BASE_URL,
     dispatchPath = DEFAULT_DISPATCH_PATH,
     timeoutMs = 30000,
+    dryRun = false,
     fetchImpl = fetch,
   } = {}) {
     if (!jwt) {
@@ -82,11 +83,26 @@ export class DispatchRouter {
     this.baseUrl = new URL(baseUrl).toString();
     this.dispatchPath = dispatchPath;
     this.timeoutMs = timeoutMs;
+    this.dryRun = dryRun;
     this.fetchImpl = fetchImpl;
   }
 
   async dispatchMatch(matchResult, options = {}) {
     const payload = formatDispatchPayload(matchResult, options);
+    const dryRun = options.dryRun ?? this.dryRun;
+    if (dryRun) {
+      return {
+        ok: true,
+        dry_run: true,
+        status: 200,
+        payload,
+        response: {
+          accepted: false,
+          dispatched: false,
+          reason: "dry_run_enabled",
+        },
+      };
+    }
     const url = new URL(this.dispatchPath, this.baseUrl).toString();
 
     const controller = new AbortController();
@@ -190,6 +206,7 @@ export function createDispatchRouterFromEnv(overrides = {}) {
     timeoutMs: process.env.PFT_TASKNODE_TIMEOUT_MS
       ? Number(process.env.PFT_TASKNODE_TIMEOUT_MS)
       : 30000,
+    dryRun: String(process.env.PFT_DISPATCH_DRY_RUN || "").toLowerCase() === "true",
     ...overrides,
   });
 }

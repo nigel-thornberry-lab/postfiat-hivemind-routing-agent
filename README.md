@@ -28,6 +28,7 @@ The Routing Agent includes a Task Node API client and ingestion script:
 - `src/health-server.mjs`
 - `src/state-ingestion.mjs`
 - `src/dispatch-routing.mjs`
+- `src/e2e-dry-run.mjs`
 
 ### Required environment variables
 
@@ -35,9 +36,11 @@ The Routing Agent includes a Task Node API client and ingestion script:
 - `PFT_TASKNODE_URL` (optional): defaults to `https://tasknode.postfiat.org`
 - `PFT_TASKNODE_TIMEOUT_MS` (optional): request timeout, default `30000`
 - `PFT_TASKNODE_DISPATCH_PATH` (optional): defaults to `/api/routing/dispatch`
+- `PFT_DISPATCH_DRY_RUN` (optional): set `true` to force dry-run dispatch behavior
 - `PFT_TASKNODE_WSS_URL` (required for real-time listener): Task Node WebSocket endpoint
 - `PFT_TASKNODE_WSS_TOPICS` (optional): comma-separated event topics; default `task_created,task_updated`
 - `PFT_ROUTING_EVENT_OUTPUT` (optional): output path for latest ranked event result; default `data/latest-match-result.json`
+- `PFT_E2E_DRY_RUN_LOG` (optional): output path for e2e dry-run log; default `data/e2e-dry-run-log.json`
 
 ### Fetch live state
 
@@ -67,6 +70,14 @@ Run live ingestion test:
 Run unit tests:
 
 `node --test src/test-dispatch-routing.mjs`
+
+### End-to-end dry-run integration
+
+Runs the full flow (WSS bootstrap -> live ingestion -> matching -> dry-run dispatch) without mutating production state:
+
+`PFT_TASKNODE_JWT="<jwt>" PFT_TASKNODE_WSS_URL="wss://<endpoint>" node src/e2e-dry-run.mjs`
+
+Writes sample execution logs to `data/e2e-dry-run-log.json`.
 
 ### Real-time task event listener
 

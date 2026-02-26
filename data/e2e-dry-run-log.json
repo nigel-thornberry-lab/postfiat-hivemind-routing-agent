@@ -1,0 +1,73 @@
+{
+  "ok": true,
+  "generated_at": "2026-02-26T23:23:48.580Z",
+  "components": {
+    "api_client_initialized": true,
+    "wss_listener_bootstrap": {
+      "attempted": true,
+      "connected": true,
+      "acknowledged": false,
+      "elapsed_ms": 1501,
+      "first_message": null,
+      "reason": "no_message_before_timeout"
+    },
+    "state_ingestion": {
+      "operators_mapped": 62,
+      "tasks_mapped": 38,
+      "wss_style_tasks_mapped": 1
+    },
+    "matching_engine": {
+      "selected_task_id": "eca88ad3-6f95-4d35-8a3f-f06f370c5938",
+      "ranked_results": 10,
+      "top_operator_id": "eba10124-8561-4e14-a391-3e3a4da023af",
+      "top_score": 0.55
+    },
+    "dispatch": {
+      "dry_run": true,
+      "status": 200,
+      "payload_preview": {
+        "task_id": "eca88ad3-6f95-4d35-8a3f-f06f370c5938",
+        "assignee": {
+          "operator_id": "eba10124-8561-4e14-a391-3e3a4da023af",
+          "wallet_address": "rHTgM9rZBZkuqF5H8DQxFWTR7biXmMvPLm"
+        },
+        "routing": {
+          "decision": "defer",
+          "rank": 1,
+          "confidence": 0.55,
+          "score": 0.55,
+          "component_scores": {
+            "expertise": 0.04,
+            "alignment": 0.94,
+            "sybil": 0.88
+          }
+        },
+        "context": {
+          "assignment_source": "hivemind-e2e-dry-run",
+          "generated_at": "2026-02-26T23:23:48.576Z",
+          "explanation": [
+            "Matched expert tags: MetaMask Snap integration",
+            "Final score combines expertise overlap with alignment and sybil weighting."
+          ],
+          "feature_snapshot": {
+            "expert_domains": [
+              "MetaMask Snap integration"
+            ],
+            "alignment_tier": "Active Contributor",
+            "sybil_risk": "Low Risk"
+          },
+          "eligibility": {
+            "passed_visibility_gate": false,
+            "passed_sybil_gate": true,
+            "gate_notes": []
+          }
+        }
+      },
+      "response": {
+        "accepted": false,
+        "dispatched": false,
+        "reason": "dry_run_enabled"
+      }
+    }
+  }
+}

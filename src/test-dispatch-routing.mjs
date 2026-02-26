@@ -89,3 +89,23 @@ test("dispatchMatch maps 429 to rate-limit retryable error", async () => {
       error.retryable === true
   );
 });
+
+test("dispatchMatch dry-run skips POST and returns payload", async () => {
+  let called = false;
+  const fakeFetch = async () => {
+    called = true;
+    throw new Error("Should not call fetch in dry-run mode");
+  };
+
+  const router = new DispatchRouter({
+    jwt: "test-jwt",
+    dryRun: true,
+    fetchImpl: fakeFetch,
+  });
+
+  const result = await router.dispatchMatch(SAMPLE_MATCH_RESULT);
+  assert.equal(result.ok, true);
+  assert.equal(result.dry_run, true);
+  assert.equal(result.response.reason, "dry_run_enabled");
+  assert.equal(called, false);
+});

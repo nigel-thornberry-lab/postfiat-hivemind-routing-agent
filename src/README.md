@@ -16,6 +16,7 @@ Reserved for Hive Mind Routing Agent implementation code (scoring engine, API ad
 - `test-state-ingestion.mjs` - live ingestion verification script against Task Node payloads
 - `dispatch-routing.mjs` - dispatch formatter + authenticated POST module for submitting ranked assignments
 - `test-dispatch-routing.mjs` - unit tests for dispatch formatting and network response handling
+- `e2e-dry-run.mjs` - end-to-end dry-run integrating WSS bootstrap, ingestion, matching, and dry-run dispatch
 
 Run:
 
@@ -30,3 +31,5 @@ Run:
 `PFT_TASKNODE_JWT="<jwt>" node src/test-state-ingestion.mjs`
 
 `node --test src/test-dispatch-routing.mjs`
+
+`PFT_TASKNODE_JWT="<jwt>" PFT_TASKNODE_WSS_URL="wss://..." node src/e2e-dry-run.mjs`
