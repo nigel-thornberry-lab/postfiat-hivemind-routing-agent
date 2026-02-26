@@ -18,6 +18,8 @@ Reserved for Hive Mind Routing Agent implementation code (scoring engine, API ad
 - `test-dispatch-routing.mjs` - unit tests for dispatch formatting and network response handling
 - `e2e-dry-run.mjs` - end-to-end dry-run integrating WSS bootstrap, ingestion, matching, and dry-run dispatch
 - `agent-daemon.mjs` - production supervisor loop that runs listener continuously with crash recovery and restart backoff
+- `integrity-integration.mjs` - live sybil/circuit-breaker integrity context and policy utilities
+- `test-integrity-integration.mjs` - tests for integrity filtering and sybil-penalty behavior
 
 Run:
 
@@ -36,3 +38,5 @@ Run:
 `PFT_TASKNODE_JWT="<jwt>" PFT_TASKNODE_WSS_URL="wss://..." node src/e2e-dry-run.mjs`
 
 `PFT_TASKNODE_JWT="<jwt>" PFT_TASKNODE_WSS_URL="wss://..." node src/agent-daemon.mjs`
+
+`node --test src/test-integrity-integration.mjs`

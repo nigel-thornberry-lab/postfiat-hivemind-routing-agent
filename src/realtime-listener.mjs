@@ -4,6 +4,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createTaskNodeClientFromEnv } from "./tasknode-client.mjs";
 import { createDispatchRouterFromEnv, DispatchError } from "./dispatch-routing.mjs";
+import { fetchLiveIntegrityContext } from "./integrity-integration.mjs";
 import { rankOperatorsForTask } from "./matcher.mjs";
 import { ingestNetworkTasks } from "./state-ingestion.mjs";
 
@@ -104,6 +105,7 @@ async function processTaskEvent(client, payload, outputPath) {
   }
 
   const operatorProfiles = await client.fetchOperatorProfiles({ limit: 50 });
+  const integrity = await fetchLiveIntegrityContext(client, operatorProfiles);
   const dataset = {
     metadata: {
       dataset: "realtime-event-snapshot",
@@ -116,6 +118,7 @@ async function processTaskEvent(client, payload, outputPath) {
     operator_profiles: operatorProfiles,
     network_tasks: [task],
     match_results: [],
+    integrity,
   };
 
   const ranking = rankOperatorsForTask(dataset, task);

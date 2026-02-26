@@ -30,6 +30,7 @@ The Routing Agent includes a Task Node API client and ingestion script:
 - `src/dispatch-routing.mjs`
 - `src/e2e-dry-run.mjs`
 - `src/agent-daemon.mjs`
+- `src/integrity-integration.mjs`
 
 ### Required environment variables
 
@@ -44,6 +45,10 @@ The Routing Agent includes a Task Node API client and ingestion script:
 - `PFT_E2E_DRY_RUN_LOG` (optional): output path for e2e dry-run log; default `data/e2e-dry-run-log.json`
 - `PFT_EVENT_PROCESS_MAX_ATTEMPTS` (optional): retries for rate-limited event processing, default `3`
 - `PFT_DISPATCH_MAX_ATTEMPTS` (optional): retries for retryable dispatch failures, default `3`
+- `PFT_TASKNODE_INTEGRITY_PATH` (optional): integrity endpoint path, default `/api/routing/integrity`
+- `PFT_INTEGRITY_BLOCKED_OPERATOR_IDS` (optional): comma-separated hard-block operator IDs
+- `PFT_INTEGRITY_BLOCKED_WALLETS` (optional): comma-separated hard-block wallet addresses
+- `PFT_INTEGRITY_UNAUTHORIZED_OPERATOR_IDS` (optional): comma-separated unauthorized operator IDs
 
 ### Fetch live state
 
@@ -73,6 +78,17 @@ Run live ingestion test:
 Run unit tests:
 
 `node --test src/test-dispatch-routing.mjs`
+
+### Integrity integration module
+
+`src/integrity-integration.mjs` provides:
+- live integrity context fetch (`sybil` snapshot + circuit-breaker lists)
+- hard-block lists for unauthorized/flagged operators
+- sybil-risk penalty multipliers applied by matcher
+
+Run integrity tests:
+
+`node --test src/test-integrity-integration.mjs`
 
 ### End-to-end dry-run integration
 

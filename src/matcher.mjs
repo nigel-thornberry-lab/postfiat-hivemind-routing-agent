@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { randomUUID } from "node:crypto";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { getSybilPenaltyMultiplier } from "./integrity-integration.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -68,6 +69,16 @@ function clamp01(value) {
   return Math.max(0, Math.min(1, value));
 }
 
+function buildIntegrityIndexes(dataset) {
+  const integrity = dataset?.integrity || {};
+  const circuitBreaker = integrity?.circuit_breaker || {};
+  return {
+    blockedOperatorIds: new Set(circuitBreaker.blocked_operator_ids || []),
+    blockedWalletAddresses: new Set(circuitBreaker.blocked_wallet_addresses || []),
+    unauthorizedOperatorIds: new Set(integrity.unauthorized_operator_ids || []),
+  };
+}
+
 function averageConfidence(expertEntries) {
   const weights = { high: 1.0, medium: 0.75, low: 0.5 };
   const values = expertEntries
@@ -97,8 +108,23 @@ export function rankOperatorsForTask(dataset, task) {
 
   const active = [];
   const rejected = [];
+  const integrity = buildIntegrityIndexes(dataset);
 
   for (const operator of dataset.operator_profiles) {
+    const isHardBlocked =
+      integrity.blockedOperatorIds.has(operator.operator_id) ||
+      integrity.blockedWalletAddresses.has(operator.wallet_address) ||
+      integrity.unauthorizedOperatorIds.has(operator.operator_id);
+
+    if (isHardBlocked) {
+      rejected.push({
+        operator_id: operator.operator_id,
+        wallet_address: operator.wallet_address,
+        reason: "Operator blocked by integrity policy (circuit breaker/unauthorized list).",
+      });
+      continue;
+    }
+
     const domains = operator.expert_knowledge || [];
     const domainText = domains.map((d) => d.domain || "").join(" ");
     const domainTokens = tokenize(domainText);
@@ -129,6 +155,10 @@ export function rankOperatorsForTask(dataset, task) {
 
     const alignmentScoreNorm = clamp01((operator.alignment_score || 0) / 100);
     const sybilScoreNorm = clamp01((operator.sybil_score || 0) / 100);
+    const sybilPenaltyMultiplier = getSybilPenaltyMultiplier(
+      operator.sybil_risk,
+      operator.sybil_score
+    );
 
     // Normalize weighted sum since this executable uses only these three components.
     const rawWeighted =
@@ -137,7 +167,7 @@ export function rankOperatorsForTask(dataset, task) {
       SCORING_WEIGHTS.sybil * sybilScoreNorm;
     const normalizationDivisor =
       SCORING_WEIGHTS.expertise + SCORING_WEIGHTS.alignment + SCORING_WEIGHTS.sybil;
-    const overallMatchScore = clamp01(rawWeighted / normalizationDivisor);
+    const overallMatchScore = clamp01((rawWeighted / normalizationDivisor) * sybilPenaltyMultiplier);
     const confidence = clamp01(overallMatchScore + (matchedDomains.length >= 2 ? 0.03 : 0));
 
     active.push({
@@ -159,6 +189,7 @@ export function rankOperatorsForTask(dataset, task) {
         expertise_score: Number(expertiseScore.toFixed(4)),
         alignment_score_norm: Number(alignmentScoreNorm.toFixed(4)),
         sybil_score_norm: Number(sybilScoreNorm.toFixed(4)),
+        sybil_penalty_multiplier: Number(sybilPenaltyMultiplier.toFixed(4)),
       },
       confidence: Number(confidence.toFixed(4)),
       routing_decision: overallMatchScore >= 0.75 ? "assign" : "defer",
@@ -171,10 +202,13 @@ export function rankOperatorsForTask(dataset, task) {
         expert_domains: matchedDomains,
         alignment_tier: operator.alignment_tier,
         sybil_risk: operator.sybil_risk,
+        integrity_blocked: false,
       },
       explanation: [
         `Matched expert tags: ${matchedDomains.join(", ")}`,
-        "Final score combines expertise overlap with alignment and sybil weighting.",
+        `Final score combines expertise overlap with alignment and sybil weighting (sybil penalty x${Number(
+          sybilPenaltyMultiplier.toFixed(2)
+        )}).`,
       ],
     });
   }

@@ -1,4 +1,5 @@
 const DEFAULT_BASE_URL = "https://tasknode.postfiat.org";
+const DEFAULT_INTEGRITY_PATH = "/api/routing/integrity";
 
 function toNumberOrNull(value) {
   if (value === null || value === undefined || value === "") return null;
@@ -69,6 +70,11 @@ export class TaskNodeClient {
 
   async getTasksRefused(limit = 100, offset = 0) {
     return this.requestJson(`/api/tasks/refused?limit=${limit}&offset=${offset}`);
+  }
+
+  async getRoutingIntegrityStatus() {
+    const path = process.env.PFT_TASKNODE_INTEGRITY_PATH || DEFAULT_INTEGRITY_PATH;
+    return this.requestJson(path);
   }
 
   mapLeaderboardToOperatorProfile(row) {
