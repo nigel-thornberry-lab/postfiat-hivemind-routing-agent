@@ -14,6 +14,8 @@ Reserved for Hive Mind Routing Agent implementation code (scoring engine, API ad
 - `schema-summary.mjs` - canonical field lists for OperatorProfile/NetworkTask/MatchResult health reporting
 - `state-ingestion.mjs` - strict parser/transformer/validator mapping raw API/WSS payloads into `OperatorProfile` + `NetworkTask`
 - `test-state-ingestion.mjs` - live ingestion verification script against Task Node payloads
+- `dispatch-routing.mjs` - dispatch formatter + authenticated POST module for submitting ranked assignments
+- `test-dispatch-routing.mjs` - unit tests for dispatch formatting and network response handling
 
 Run:
 
@@ -26,3 +28,5 @@ Run:
 `node src/health-server.mjs`
 
 `PFT_TASKNODE_JWT="<jwt>" node src/test-state-ingestion.mjs`
+
+`node --test src/test-dispatch-routing.mjs`

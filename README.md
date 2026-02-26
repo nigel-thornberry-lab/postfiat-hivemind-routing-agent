@@ -27,12 +27,14 @@ The Routing Agent includes a Task Node API client and ingestion script:
 - `src/realtime-listener.mjs`
 - `src/health-server.mjs`
 - `src/state-ingestion.mjs`
+- `src/dispatch-routing.mjs`
 
 ### Required environment variables
 
 - `PFT_TASKNODE_JWT` (required): bearer token for Task Node API auth
 - `PFT_TASKNODE_URL` (optional): defaults to `https://tasknode.postfiat.org`
 - `PFT_TASKNODE_TIMEOUT_MS` (optional): request timeout, default `30000`
+- `PFT_TASKNODE_DISPATCH_PATH` (optional): defaults to `/api/routing/dispatch`
 - `PFT_TASKNODE_WSS_URL` (required for real-time listener): Task Node WebSocket endpoint
 - `PFT_TASKNODE_WSS_TOPICS` (optional): comma-separated event topics; default `task_created,task_updated`
 - `PFT_ROUTING_EVENT_OUTPUT` (optional): output path for latest ranked event result; default `data/latest-match-result.json`
@@ -54,6 +56,17 @@ This writes mapped live data to `data/live-state.json` in the same schema family
 Run live ingestion test:
 
 `PFT_TASKNODE_JWT="<jwt>" node src/test-state-ingestion.mjs`
+
+### Dispatch routing module (ranked match -> assignment submission)
+
+`src/dispatch-routing.mjs` provides:
+- dispatch payload formatter aligned to task-assignment schema
+- authenticated POST submission to Task Node
+- structured error handling for unauthorized (`401/403`), rate-limit (`429`), and circuit-breaker style failures
+
+Run unit tests:
+
+`node --test src/test-dispatch-routing.mjs`
 
 ### Real-time task event listener
 
