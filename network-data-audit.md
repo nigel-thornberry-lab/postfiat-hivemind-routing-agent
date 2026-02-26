@@ -64,6 +64,22 @@ Endpoint: `GET /api/profile/public/{wallet_address}`
 | `profile.sybil_score.linked_accounts` | string[] | `["github","x"]` |
 | `profile.avatar.image_url` | string | `https://pft-ipfs-testnet-node-1.fly.dev/ipfs/...` |
 
+### Expert Knowledge Tag Mapping (Observed)
+
+| Field | Inferred Type | Real Example Value |
+|---|---|---|
+| `profile.expert_knowledge` | array<object> | `[{"domain":"Lead generation business models","confidence":"High"}, {"domain":"Meta Conversions API integration","confidence":"Medium"}]` |
+| `profile.expert_knowledge[].domain` | string | `Lead generation business models` |
+| `profile.expert_knowledge[].confidence` | string | `High` |
+| `profile.expert_knowledge[].domain` | string | `Meta Ads Manager optimization` |
+| `profile.expert_knowledge[].confidence` | string | `High` |
+| `profile.expert_knowledge[].domain` | string | `Direct response video production` |
+| `profile.expert_knowledge[].confidence` | string | `High` |
+| `profile.expert_knowledge[].domain` | string | `Unit economics and profit modeling` |
+| `profile.expert_knowledge[].confidence` | string | `High` |
+| `profile.expert_knowledge[].domain` | string | `Meta Conversions API integration` |
+| `profile.expert_knowledge[].confidence` | string | `Medium` |
+
 ## Profile Runs (Observed Fields)
 
 Endpoint: `GET /api/profile/runs?latest=true`

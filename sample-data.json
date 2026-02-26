@@ -1,0 +1,686 @@
+{
+  "metadata": {
+    "dataset": "Hive Mind Routing Agent sample harness",
+    "generated_at": "2026-02-26T20:22:53Z",
+    "source": "Live Post Fiat network audit (leaderboard + profile/public)",
+    "operator_count": 5,
+    "task_count": 5,
+    "match_result_count": 5
+  },
+  "operator_profiles": [
+    {
+      "operator_id": "9c1a0196-f7af-4b07-bc3e-f03e5a86eeaf",
+      "wallet_address": "rh7eykJ99XnGTm2iNBzeD5A9MLqnb7kXCp",
+      "wallet_label": "Main Wallet",
+      "summary": "macOS Unity reverse engineer forensics",
+      "capabilities": [
+        "Develop macOS process memory readers using mach_vm_read and Python ctypes.",
+        "Reverse engineer Unity/Mono runtimes to extract live application state.",
+        "Perform deep forensic analysis of software clients via DLL decompilation and asset bundle extraction.",
+        "Design and implement event-driven data capture systems with high-frequency detection cycles.",
+        "Conduct comparative architectural audits of complex software engines to guide porting and simulation."
+      ],
+      "expert_knowledge": [
+        {
+          "domain": "Reverse engineering and decompilation",
+          "confidence": "High"
+        },
+        {
+          "domain": "Process memory forensics",
+          "confidence": "High"
+        },
+        {
+          "domain": "Unity and Mono runtime internals",
+          "confidence": "High"
+        },
+        {
+          "domain": "macOS system security architecture",
+          "confidence": "High"
+        },
+        {
+          "domain": "Game engine simulation design",
+          "confidence": "High"
+        },
+        {
+          "domain": "Event-driven systems architecture",
+          "confidence": "Medium"
+        },
+        {
+          "domain": "Static asset extraction and parsing",
+          "confidence": "Medium"
+        },
+        {
+          "domain": "AI training data infrastructure",
+          "confidence": "Medium"
+        }
+      ],
+      "sybil_score": 92,
+      "sybil_risk": "Low Risk",
+      "linked_accounts": [
+        "github",
+        "x"
+      ],
+      "alignment_score": 84,
+      "alignment_tier": "Active Contributor",
+      "weekly_tasks": 1,
+      "monthly_tasks": 82,
+      "weekly_rewards": 3200,
+      "monthly_rewards": 548689.02,
+      "leaderboard_score_week": 64,
+      "leaderboard_score_month": 78,
+      "is_public": true,
+      "is_published": true,
+      "published_at": "2026-02-06T20:19:03.331Z",
+      "nft_image_url": "ipfs://bafybeiasznk4v6nb4pb5v2euu44tmvyumnmlrlcgw5acphex46mp2yp2ee",
+      "avatar_image_url": "https://pft-ipfs-testnet-node-1.fly.dev/ipfs/bafybeiasznk4v6nb4pb5v2euu44tmvyumnmlrlcgw5acphex46mp2yp2ee"
+    },
+    {
+      "operator_id": "7f129508-935a-42e2-95d0-85907c552c6c",
+      "wallet_address": "rDVKRNp3kWE1ykryU8ta6bBZWrFjFetyjB",
+      "wallet_label": "Yuri",
+      "summary": "React real-time state authentication architect",
+      "capabilities": [
+        "Architect and implement global state management for real-time identity resolution.",
+        "Diagnose and resolve complex React race conditions and async closure bugs.",
+        "Design and ship high-performance WebSocket (WSS) synchronization architectures.",
+        "Build secure authentication persistence layers with JWT and localStorage management.",
+        "Develop advanced frontend UX components including drag-and-drop file validation and previews."
+      ],
+      "expert_knowledge": [
+        {
+          "domain": "React state management and hooks",
+          "confidence": "High"
+        },
+        {
+          "domain": "Authentication and session persistence",
+          "confidence": "High"
+        },
+        {
+          "domain": "WebSocket and real-time architecture",
+          "confidence": "High"
+        },
+        {
+          "domain": "Frontend performance and UX optimization",
+          "confidence": "High"
+        },
+        {
+          "domain": "Asynchronous race condition mitigation",
+          "confidence": "High"
+        },
+        {
+          "domain": "Identity resolution and global state",
+          "confidence": "Medium"
+        },
+        {
+          "domain": "Client-side file validation and handling",
+          "confidence": "Medium"
+        },
+        {
+          "domain": "API and database layer integration",
+          "confidence": "Medium"
+        }
+      ],
+      "sybil_score": 84,
+      "sybil_risk": "Low Risk",
+      "linked_accounts": [
+        "github",
+        "x"
+      ],
+      "alignment_score": 92,
+      "alignment_tier": "Active Contributor",
+      "weekly_tasks": 43,
+      "monthly_tasks": 79,
+      "weekly_rewards": 322000,
+      "monthly_rewards": 613600,
+      "leaderboard_score_week": 93,
+      "leaderboard_score_month": 84,
+      "is_public": true,
+      "is_published": true,
+      "published_at": "2026-02-18T10:05:52.967Z",
+      "nft_image_url": "ipfs://bafybeihmvjus44ppvtascgxismuydu5ngycu4s2letvkxsfscyuani4rl4",
+      "avatar_image_url": "https://pft-ipfs-testnet-node-1.fly.dev/ipfs/bafybeihmvjus44ppvtascgxismuydu5ngycu4s2letvkxsfscyuani4rl4"
+    },
+    {
+      "operator_id": "d6453c54-94b1-467d-a376-6512130cc779",
+      "wallet_address": "rnmLkDT2SBeaFA5z2ogdUCbJ2GMzn2sLLu",
+      "wallet_label": "Main wallet",
+      "summary": "Discord bot LLM NFT developer",
+      "capabilities": [
+        "Develop Discord bots with complex slash command architectures and interactive UI modules.",
+        "Integrate LLM APIs (OpenRouter) with parallel execution and multi-model response aggregation.",
+        "Build structured data ingestion layers with local JSON/database storage for financial and sentiment tracking.",
+        "Implement intelligent message listeners for bot self-parsing and context-aware LLM analysis.",
+        "Design and deploy automated NFT minting agents with direct blockchain/testnet integration."
+      ],
+      "expert_knowledge": [
+        {
+          "domain": "Discord bot architecture",
+          "confidence": "High"
+        },
+        {
+          "domain": "LLM API orchestration",
+          "confidence": "High"
+        },
+        {
+          "domain": "Full-stack JavaScript development",
+          "confidence": "High"
+        },
+        {
+          "domain": "Structured data ingestion",
+          "confidence": "High"
+        },
+        {
+          "domain": "Financial trade journaling systems",
+          "confidence": "Medium"
+        },
+        {
+          "domain": "NFT minting workflows",
+          "confidence": "Medium"
+        },
+        {
+          "domain": "Context window management",
+          "confidence": "Medium"
+        }
+      ],
+      "sybil_score": 89,
+      "sybil_risk": "Low Risk",
+      "linked_accounts": [
+        "github",
+        "x"
+      ],
+      "alignment_score": 82,
+      "alignment_tier": "Active Contributor",
+      "weekly_tasks": 11,
+      "monthly_tasks": 74,
+      "weekly_rewards": 69025,
+      "monthly_rewards": 481025,
+      "leaderboard_score_week": 67,
+      "leaderboard_score_month": 74,
+      "is_public": true,
+      "is_published": true,
+      "published_at": "2026-02-25T01:22:12.557Z",
+      "nft_image_url": "ipfs://bafybeidscrink7tkkmckjvfsf663xvek67ezc6brciijn6j4moyjuxaxta",
+      "avatar_image_url": "https://pft-ipfs-testnet-node-1.fly.dev/ipfs/bafybeidscrink7tkkmckjvfsf663xvek67ezc6brciijn6j4moyjuxaxta"
+    },
+    {
+      "operator_id": "1c90e8a8-8e16-4dad-9911-4b9441766fd4",
+      "wallet_address": "rsZ8Si5t3TzEdnBfcRny6ydfnQvgjxspqq",
+      "wallet_label": "Wallet",
+      "summary": "Enterprise AI interface architect engineer",
+      "capabilities": [
+        "Design complex information architectures for activity-centered workspace models.",
+        "Develop detailed engineering handoff specs for React-based UI components and state management.",
+        "Architect summonable AI command overlays with advanced focus-trap and z-index logic.",
+        "Create high-fidelity dashboard layouts with multi-vertical information hierarchies.",
+        "Design transparent AI reasoning interfaces that replace 'black-box' text outputs with structured data."
+      ],
+      "expert_knowledge": [
+        {
+          "domain": "Product information architecture",
+          "confidence": "High"
+        },
+        {
+          "domain": "Enterprise UX design systems",
+          "confidence": "High"
+        },
+        {
+          "domain": "Frontend engineering handoff",
+          "confidence": "High"
+        },
+        {
+          "domain": "AI-native interface patterns",
+          "confidence": "High"
+        },
+        {
+          "domain": "Interaction design and state management",
+          "confidence": "High"
+        },
+        {
+          "domain": "Navigation and routing architecture",
+          "confidence": "Medium"
+        },
+        {
+          "domain": "Accessibility and focus management",
+          "confidence": "Medium"
+        },
+        {
+          "domain": "Competitive UI pattern analysis",
+          "confidence": "Medium"
+        }
+      ],
+      "sybil_score": 70,
+      "sybil_risk": "Moderate",
+      "linked_accounts": [
+        "x"
+      ],
+      "alignment_score": 51,
+      "alignment_tier": "Ramping",
+      "weekly_tasks": 49,
+      "monthly_tasks": 49,
+      "weekly_rewards": 275630,
+      "monthly_rewards": 275630,
+      "leaderboard_score_week": 62,
+      "leaderboard_score_month": 47,
+      "is_public": true,
+      "is_published": true,
+      "published_at": "2026-02-24T05:23:30.169Z",
+      "nft_image_url": "ipfs://bafybeiautljer236msg2tryaapippbppfnxpcsmo5snfidnnqkj252name",
+      "avatar_image_url": "https://pft-ipfs-testnet-node-1.fly.dev/ipfs/bafybeiautljer236msg2tryaapippbppfnxpcsmo5snfidnnqkj252name"
+    },
+    {
+      "operator_id": "6433ab93-921f-465d-a924-2202ec0e972a",
+      "wallet_address": "rpyTMcAKiCxqY7VXenD5ercGGzGWNV9xpg",
+      "wallet_label": "Wallet",
+      "summary": "AI marketing intelligence pipeline builder",
+      "capabilities": [
+        "Build AI-native competitive intelligence pipelines for brand positioning and ad creative.",
+        "Design and deploy automated workflows for multi-channel ad copy and creative brief generation.",
+        "Execute paid social media campaigns (TikTok/Meta) with AI-optimized assets and targeting.",
+        "Synthesize proprietary market intelligence into structured reports for private equity and UHNW sectors.",
+        "Develop and deploy responsive web interfaces for technical infrastructure and node operations."
+      ],
+      "expert_knowledge": [
+        {
+          "domain": "AI-native marketing operations",
+          "confidence": "High"
+        },
+        {
+          "domain": "Private equity market intelligence",
+          "confidence": "High"
+        },
+        {
+          "domain": "LLM prompt engineering",
+          "confidence": "High"
+        },
+        {
+          "domain": "E-commerce growth strategy",
+          "confidence": "High"
+        },
+        {
+          "domain": "Automated competitive intelligence",
+          "confidence": "Medium"
+        },
+        {
+          "domain": "Paid social campaign optimization",
+          "confidence": "Medium"
+        },
+        {
+          "domain": "UHNW client servicing",
+          "confidence": "Medium"
+        },
+        {
+          "domain": "AI-generated creative workflows",
+          "confidence": "Medium"
+        }
+      ],
+      "sybil_score": 84,
+      "sybil_risk": "Low Risk",
+      "linked_accounts": [
+        "github",
+        "x"
+      ],
+      "alignment_score": 65,
+      "alignment_tier": "Contributor",
+      "weekly_tasks": 19,
+      "monthly_tasks": 48,
+      "weekly_rewards": 126290,
+      "monthly_rewards": 292699.5,
+      "leaderboard_score_week": 60,
+      "leaderboard_score_month": 58,
+      "is_public": true,
+      "is_published": true,
+      "published_at": "2026-02-02T01:07:35.453Z",
+      "nft_image_url": "ipfs://bafybeid4mflzd7esc7vpr6bty27v3zsf72ezdexfggywenyvcgnqz6mjvu",
+      "avatar_image_url": "https://pft-ipfs-testnet-node-1.fly.dev/ipfs/bafybeid4mflzd7esc7vpr6bty27v3zsf72ezdexfggywenyvcgnqz6mjvu"
+    }
+  ],
+  "network_tasks": [
+    {
+      "task_id": "e80084fd-3472-4861-85a6-7c04ae2b3ac3",
+      "title": "Build React dashboard for live operator routing metrics",
+      "type": "network",
+      "status": "pending",
+      "requirements": "Ship a React + TypeScript dashboard showing operator match scores, filters for sybil/alignment thresholds, and task assignment previews.",
+      "verification_ask": null,
+      "verification_status": null,
+      "pft_offer": 3200.0,
+      "reward_tier": null,
+      "reward_score": null,
+      "reward_summary": null,
+      "created_at_ms": 1772101200000,
+      "accepted_at_ms": null,
+      "submitted_at_ms": null,
+      "rewarded_at_ms": null,
+      "submission_id": null,
+      "tx_hash": null,
+      "refusal_category": null,
+      "reason": null
+    },
+    {
+      "task_id": "1d41e24b-168c-4649-b319-e889da94b91e",
+      "title": "Map leaderboard/profile fields into canonical routing schema",
+      "type": "network",
+      "status": "outstanding",
+      "requirements": "Produce deterministic field mapping from /api/leaderboard and /api/profile/public into OperatorProfile with fallback rules for 403 profiles.",
+      "verification_ask": "Which fields are mandatory for ranking when profile/public is unavailable?",
+      "verification_status": "requested",
+      "pft_offer": 2400.0,
+      "reward_tier": null,
+      "reward_score": null,
+      "reward_summary": null,
+      "created_at_ms": 1772102400000,
+      "accepted_at_ms": 1772104200000,
+      "submitted_at_ms": null,
+      "rewarded_at_ms": null,
+      "submission_id": null,
+      "tx_hash": null,
+      "refusal_category": null,
+      "reason": null
+    },
+    {
+      "task_id": "4604649e-7002-440c-b652-b06187cc778a",
+      "title": "Set up L1 node health telemetry and alerting adapter",
+      "type": "alpha",
+      "status": "pending",
+      "requirements": "Implement ingestion of node health signals into routing context and trigger alerts for degraded consensus/network states.",
+      "verification_ask": null,
+      "verification_status": null,
+      "pft_offer": 5000.0,
+      "reward_tier": null,
+      "reward_score": null,
+      "reward_summary": null,
+      "created_at_ms": 1772103000000,
+      "accepted_at_ms": null,
+      "submitted_at_ms": null,
+      "rewarded_at_ms": null,
+      "submission_id": null,
+      "tx_hash": null,
+      "refusal_category": null,
+      "reason": null
+    },
+    {
+      "task_id": "350ba2d2-fd8a-4b0a-9221-c0eda54d840f",
+      "title": "Design feature engineering pipeline for match scoring",
+      "type": "network",
+      "status": "pending",
+      "requirements": "Build scoring pipeline combining expertise overlap, capability overlap, alignment normalization, sybil gating, and activity velocity.",
+      "verification_ask": null,
+      "verification_status": null,
+      "pft_offer": 2900.0,
+      "reward_tier": null,
+      "reward_score": null,
+      "reward_summary": null,
+      "created_at_ms": 1772103600000,
+      "accepted_at_ms": null,
+      "submitted_at_ms": null,
+      "rewarded_at_ms": null,
+      "submission_id": null,
+      "tx_hash": null,
+      "refusal_category": null,
+      "reason": null
+    },
+    {
+      "task_id": "c146b97c-380d-4ac5-8b2f-74faac92d953",
+      "title": "Create frontend prototype for operator-task assignment review",
+      "type": "network",
+      "status": "pending",
+      "requirements": "Deliver UI for reviewing ranked candidates, confidence scores, gate failures, and explainability notes before final assignment.",
+      "verification_ask": null,
+      "verification_status": null,
+      "pft_offer": 2600.0,
+      "reward_tier": null,
+      "reward_score": null,
+      "reward_summary": null,
+      "created_at_ms": 1772104200000,
+      "accepted_at_ms": null,
+      "submitted_at_ms": null,
+      "rewarded_at_ms": null,
+      "submission_id": null,
+      "tx_hash": null,
+      "refusal_category": null,
+      "reason": null
+    }
+  ],
+  "match_results": [
+    {
+      "match_id": "4ded930f-c79f-46f4-a706-d0ff715109e7",
+      "generated_at": "2026-02-26T20:22:53Z",
+      "task": {
+        "task_id": "e80084fd-3472-4861-85a6-7c04ae2b3ac3",
+        "type": "network",
+        "pft_offer": 3200.0
+      },
+      "operator": {
+        "operator_id": "9c1a0196-f7af-4b07-bc3e-f03e5a86eeaf",
+        "wallet_address": "rh7eykJ99XnGTm2iNBzeD5A9MLqnb7kXCp",
+        "alignment_score": 84,
+        "sybil_score": 92
+      },
+      "scores": {
+        "overall_match_score": 0.86,
+        "capability_score": 0.85,
+        "expertise_score": 0.97,
+        "alignment_score_norm": 0.84,
+        "sybil_score_norm": 0.92,
+        "activity_score": 0.56
+      },
+      "confidence": 0.91,
+      "routing_decision": "assign",
+      "rank": 1,
+      "eligibility": {
+        "passed_visibility_gate": true,
+        "passed_sybil_gate": true,
+        "gate_notes": []
+      },
+      "feature_snapshot": {
+        "capabilities": [
+          "Develop macOS process memory readers using mach_vm_read and Python ctypes.",
+          "Reverse engineer Unity/Mono runtimes to extract live application state."
+        ],
+        "expert_domains": [
+          "Reverse engineering and decompilation",
+          "Process memory forensics",
+          "Unity and Mono runtime internals"
+        ],
+        "alignment_tier": "Active Contributor",
+        "sybil_risk": "Low Risk"
+      },
+      "explanation": [
+        "Operator capabilities overlap with task requirements.",
+        "Alignment and sybil signals support this assignment."
+      ]
+    },
+    {
+      "match_id": "25c9dfa2-5b4e-4879-b603-dca81f31e03e",
+      "generated_at": "2026-02-26T20:22:53Z",
+      "task": {
+        "task_id": "1d41e24b-168c-4649-b319-e889da94b91e",
+        "type": "network",
+        "pft_offer": 2400.0
+      },
+      "operator": {
+        "operator_id": "7f129508-935a-42e2-95d0-85907c552c6c",
+        "wallet_address": "rDVKRNp3kWE1ykryU8ta6bBZWrFjFetyjB",
+        "alignment_score": 92,
+        "sybil_score": 84
+      },
+      "scores": {
+        "overall_match_score": 0.91,
+        "capability_score": 0.85,
+        "expertise_score": 0.97,
+        "alignment_score_norm": 0.92,
+        "sybil_score_norm": 0.84,
+        "activity_score": 1.0
+      },
+      "confidence": 0.96,
+      "routing_decision": "assign",
+      "rank": 1,
+      "eligibility": {
+        "passed_visibility_gate": true,
+        "passed_sybil_gate": true,
+        "gate_notes": []
+      },
+      "feature_snapshot": {
+        "capabilities": [
+          "Architect and implement global state management for real-time identity resolution.",
+          "Diagnose and resolve complex React race conditions and async closure bugs."
+        ],
+        "expert_domains": [
+          "React state management and hooks",
+          "Authentication and session persistence",
+          "WebSocket and real-time architecture"
+        ],
+        "alignment_tier": "Active Contributor",
+        "sybil_risk": "Low Risk"
+      },
+      "explanation": [
+        "Operator capabilities overlap with task requirements.",
+        "Alignment and sybil signals support this assignment."
+      ]
+    },
+    {
+      "match_id": "1f17cd9f-1def-44fc-8bde-8ae2505d9b8f",
+      "generated_at": "2026-02-26T20:22:53Z",
+      "task": {
+        "task_id": "4604649e-7002-440c-b652-b06187cc778a",
+        "type": "alpha",
+        "pft_offer": 5000.0
+      },
+      "operator": {
+        "operator_id": "d6453c54-94b1-467d-a376-6512130cc779",
+        "wallet_address": "rnmLkDT2SBeaFA5z2ogdUCbJ2GMzn2sLLu",
+        "alignment_score": 82,
+        "sybil_score": 89
+      },
+      "scores": {
+        "overall_match_score": 0.85,
+        "capability_score": 0.85,
+        "expertise_score": 0.94,
+        "alignment_score_norm": 0.82,
+        "sybil_score_norm": 0.89,
+        "activity_score": 0.64
+      },
+      "confidence": 0.9,
+      "routing_decision": "assign",
+      "rank": 1,
+      "eligibility": {
+        "passed_visibility_gate": true,
+        "passed_sybil_gate": true,
+        "gate_notes": []
+      },
+      "feature_snapshot": {
+        "capabilities": [
+          "Develop Discord bots with complex slash command architectures and interactive UI modules.",
+          "Integrate LLM APIs (OpenRouter) with parallel execution and multi-model response aggregation."
+        ],
+        "expert_domains": [
+          "Discord bot architecture",
+          "LLM API orchestration",
+          "Full-stack JavaScript development"
+        ],
+        "alignment_tier": "Active Contributor",
+        "sybil_risk": "Low Risk"
+      },
+      "explanation": [
+        "Operator capabilities overlap with task requirements.",
+        "Alignment and sybil signals support this assignment."
+      ]
+    },
+    {
+      "match_id": "996e928b-fdf7-4b50-bd43-11c858193a73",
+      "generated_at": "2026-02-26T20:22:53Z",
+      "task": {
+        "task_id": "350ba2d2-fd8a-4b0a-9221-c0eda54d840f",
+        "type": "network",
+        "pft_offer": 2900.0
+      },
+      "operator": {
+        "operator_id": "1c90e8a8-8e16-4dad-9911-4b9441766fd4",
+        "wallet_address": "rsZ8Si5t3TzEdnBfcRny6ydfnQvgjxspqq",
+        "alignment_score": 51,
+        "sybil_score": 70
+      },
+      "scores": {
+        "overall_match_score": 0.8,
+        "capability_score": 0.85,
+        "expertise_score": 0.97,
+        "alignment_score_norm": 0.51,
+        "sybil_score_norm": 0.7,
+        "activity_score": 0.98
+      },
+      "confidence": 0.85,
+      "routing_decision": "assign",
+      "rank": 1,
+      "eligibility": {
+        "passed_visibility_gate": true,
+        "passed_sybil_gate": true,
+        "gate_notes": []
+      },
+      "feature_snapshot": {
+        "capabilities": [
+          "Design complex information architectures for activity-centered workspace models.",
+          "Develop detailed engineering handoff specs for React-based UI components and state management."
+        ],
+        "expert_domains": [
+          "Product information architecture",
+          "Enterprise UX design systems",
+          "Frontend engineering handoff"
+        ],
+        "alignment_tier": "Ramping",
+        "sybil_risk": "Moderate"
+      },
+      "explanation": [
+        "Operator capabilities overlap with task requirements.",
+        "Alignment and sybil signals support this assignment."
+      ]
+    },
+    {
+      "match_id": "92bb428d-5795-47c1-a7b1-20de6eb3ebfb",
+      "generated_at": "2026-02-26T20:22:53Z",
+      "task": {
+        "task_id": "c146b97c-380d-4ac5-8b2f-74faac92d953",
+        "type": "network",
+        "pft_offer": 2600.0
+      },
+      "operator": {
+        "operator_id": "6433ab93-921f-465d-a924-2202ec0e972a",
+        "wallet_address": "rpyTMcAKiCxqY7VXenD5ercGGzGWNV9xpg",
+        "alignment_score": 65,
+        "sybil_score": 84
+      },
+      "scores": {
+        "overall_match_score": 0.81,
+        "capability_score": 0.85,
+        "expertise_score": 0.97,
+        "alignment_score_norm": 0.65,
+        "sybil_score_norm": 0.84,
+        "activity_score": 0.57
+      },
+      "confidence": 0.86,
+      "routing_decision": "assign",
+      "rank": 1,
+      "eligibility": {
+        "passed_visibility_gate": true,
+        "passed_sybil_gate": true,
+        "gate_notes": []
+      },
+      "feature_snapshot": {
+        "capabilities": [
+          "Build AI-native competitive intelligence pipelines for brand positioning and ad creative.",
+          "Design and deploy automated workflows for multi-channel ad copy and creative brief generation."
+        ],
+        "expert_domains": [
+          "AI-native marketing operations",
+          "Private equity market intelligence",
+          "LLM prompt engineering"
+        ],
+        "alignment_tier": "Contributor",
+        "sybil_risk": "Low Risk"
+      },
+      "explanation": [
+        "Operator capabilities overlap with task requirements.",
+        "Alignment and sybil signals support this assignment."
+      ]
+    }
+  ]
+}
