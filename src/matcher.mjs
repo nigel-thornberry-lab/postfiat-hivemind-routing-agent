@@ -2,7 +2,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { randomUUID } from "node:crypto";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -45,7 +45,7 @@ const SCORING_WEIGHTS = {
   sybil: 0.15,
 };
 
-function loadDataset(datasetPath = DEFAULT_DATASET_PATH) {
+export function loadDataset(datasetPath = DEFAULT_DATASET_PATH) {
   const raw = fs.readFileSync(datasetPath, "utf8");
   return JSON.parse(raw);
 }
@@ -77,7 +77,7 @@ function averageConfidence(expertEntries) {
   return values.reduce((a, b) => a + b, 0) / values.length;
 }
 
-function findTask(dataset, { taskId, taskTitle }) {
+export function findTask(dataset, { taskId, taskTitle }) {
   if (taskId) {
     return dataset.network_tasks.find((task) => task.task_id === taskId) || null;
   }
@@ -90,7 +90,7 @@ function findTask(dataset, { taskId, taskTitle }) {
   return dataset.network_tasks[0] || null;
 }
 
-function rankOperatorsForTask(dataset, task) {
+export function rankOperatorsForTask(dataset, task) {
   const sourceText = `${task.title} ${task.requirements}`;
   const taskTokens = new Set(tokenize(sourceText));
   const taskTokenCount = Math.max(taskTokens.size, 1);
@@ -216,4 +216,9 @@ function main() {
   console.log(JSON.stringify(output, null, 2));
 }
 
-main();
+const isDirectExecution =
+  process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href;
+
+if (isDirectExecution) {
+  main();
+}
