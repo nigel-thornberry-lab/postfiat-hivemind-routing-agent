@@ -1,0 +1,1305 @@
+{
+  "metadata": {
+    "dataset": "Hive Mind Routing Agent live state snapshot",
+    "generated_at": "2026-02-26T21:48:43.387Z",
+    "source": "https://tasknode.postfiat.org/",
+    "operator_count": 10,
+    "task_count": 32,
+    "match_result_count": 0
+  },
+  "operator_profiles": [
+    {
+      "operator_id": "7f129508-935a-42e2-95d0-85907c552c6c",
+      "wallet_address": "rDVKRNp3kWE1ykryU8ta6bBZWrFjFetyjB",
+      "wallet_label": "Yuri",
+      "summary": "React real-time state authentication architect",
+      "capabilities": [
+        "Architect and implement global state management for real-time identity resolution.",
+        "Diagnose and resolve complex React race conditions and async closure bugs.",
+        "Design and ship high-performance WebSocket (WSS) synchronization architectures.",
+        "Build secure authentication persistence layers with JWT and localStorage management.",
+        "Develop advanced frontend UX components including drag-and-drop file validation and previews."
+      ],
+      "expert_knowledge": [
+        {
+          "domain": "React state management and hooks",
+          "confidence": "High"
+        },
+        {
+          "domain": "Authentication and session persistence",
+          "confidence": "High"
+        },
+        {
+          "domain": "WebSocket and real-time architecture",
+          "confidence": "High"
+        },
+        {
+          "domain": "Frontend performance and UX optimization",
+          "confidence": "High"
+        },
+        {
+          "domain": "Asynchronous race condition mitigation",
+          "confidence": "High"
+        },
+        {
+          "domain": "Identity resolution and global state",
+          "confidence": "Medium"
+        },
+        {
+          "domain": "Client-side file validation and handling",
+          "confidence": "Medium"
+        },
+        {
+          "domain": "API and database layer integration",
+          "confidence": "Medium"
+        }
+      ],
+      "sybil_score": 84,
+      "sybil_risk": "Low Risk",
+      "linked_accounts": [
+        "github",
+        "x"
+      ],
+      "alignment_score": 92,
+      "alignment_tier": "Active Contributor",
+      "weekly_tasks": 41,
+      "monthly_tasks": 73,
+      "weekly_rewards": 314050,
+      "monthly_rewards": 567350,
+      "leaderboard_score_week": 93,
+      "leaderboard_score_month": 84,
+      "is_public": true,
+      "is_published": true,
+      "published_at": "2026-02-18T10:05:52.967Z",
+      "nft_image_url": "ipfs://bafybeihmvjus44ppvtascgxismuydu5ngycu4s2letvkxsfscyuani4rl4",
+      "avatar_image_url": "https://pft-ipfs-testnet-node-1.fly.dev/ipfs/bafybeihmvjus44ppvtascgxismuydu5ngycu4s2letvkxsfscyuani4rl4"
+    },
+    {
+      "operator_id": "eba10124-8561-4e14-a391-3e3a4da023af",
+      "wallet_address": "rHTgM9rZBZkuqF5H8DQxFWTR7biXmMvPLm",
+      "wallet_label": "Wallet",
+      "summary": "Web3 frontend engineer MetaMask automation",
+      "capabilities": [
+        "Develop React-based blockchain interfaces with MetaMask Snap integration.",
+        "Architect and deploy automated Discord community infrastructure with custom AI alert bots.",
+        "Implement native L1 NFT marketplace features including peer-to-peer trading and offer management.",
+        "Design dynamic, schema-driven UI components for multi-modal data collection.",
+        "Build secure token claim portals and asset issuance pipelines for testnet ecosystems."
+      ],
+      "expert_knowledge": [
+        {
+          "domain": "Web3 frontend engineering",
+          "confidence": "High"
+        },
+        {
+          "domain": "MetaMask Snap integration",
+          "confidence": "High"
+        },
+        {
+          "domain": "L1 native asset operations",
+          "confidence": "High"
+        },
+        {
+          "domain": "Dynamic React component architecture",
+          "confidence": "High"
+        },
+        {
+          "domain": "Community infrastructure automation",
+          "confidence": "Medium"
+        },
+        {
+          "domain": "DEX and Liquidity plumbing",
+          "confidence": "Medium"
+        },
+        {
+          "domain": "RPC proxy architecture",
+          "confidence": "Medium"
+        }
+      ],
+      "sybil_score": 88,
+      "sybil_risk": "Low Risk",
+      "linked_accounts": [
+        "github",
+        "x"
+      ],
+      "alignment_score": 94,
+      "alignment_tier": "Active Contributor",
+      "weekly_tasks": 12,
+      "monthly_tasks": 40,
+      "weekly_rewards": 97000,
+      "monthly_rewards": 303025,
+      "leaderboard_score_week": 77,
+      "leaderboard_score_month": 78,
+      "is_public": false,
+      "is_published": true,
+      "published_at": "2026-02-14T22:21:54.258Z",
+      "nft_image_url": "ipfs://bafybeigvqu5n4idwt3xvxmmxgzuj6lal6slpl3fbhc4uiabu55i5rmmwaa",
+      "avatar_image_url": "https://pft-ipfs-testnet-node-1.fly.dev/ipfs/bafybeigvqu5n4idwt3xvxmmxgzuj6lal6slpl3fbhc4uiabu55i5rmmwaa"
+    },
+    {
+      "operator_id": "9c1a0196-f7af-4b07-bc3e-f03e5a86eeaf",
+      "wallet_address": "rh7eykJ99XnGTm2iNBzeD5A9MLqnb7kXCp",
+      "wallet_label": "Main Wallet",
+      "summary": "macOS Unity reverse engineer forensics",
+      "capabilities": [
+        "Develop macOS process memory readers using mach_vm_read and Python ctypes.",
+        "Reverse engineer Unity/Mono runtimes to extract live application state.",
+        "Perform deep forensic analysis of software clients via DLL decompilation and asset bundle extraction.",
+        "Design and implement event-driven data capture systems with high-frequency detection cycles.",
+        "Conduct comparative architectural audits of complex software engines to guide porting and simulation."
+      ],
+      "expert_knowledge": [
+        {
+          "domain": "Reverse engineering and decompilation",
+          "confidence": "High"
+        },
+        {
+          "domain": "Process memory forensics",
+          "confidence": "High"
+        },
+        {
+          "domain": "Unity and Mono runtime internals",
+          "confidence": "High"
+        },
+        {
+          "domain": "macOS system security architecture",
+          "confidence": "High"
+        },
+        {
+          "domain": "Game engine simulation design",
+          "confidence": "High"
+        },
+        {
+          "domain": "Event-driven systems architecture",
+          "confidence": "Medium"
+        },
+        {
+          "domain": "Static asset extraction and parsing",
+          "confidence": "Medium"
+        },
+        {
+          "domain": "AI training data infrastructure",
+          "confidence": "Medium"
+        }
+      ],
+      "sybil_score": 92,
+      "sybil_risk": "Low Risk",
+      "linked_accounts": [
+        "github",
+        "x"
+      ],
+      "alignment_score": 84,
+      "alignment_tier": "Active Contributor",
+      "weekly_tasks": 16,
+      "monthly_tasks": 81,
+      "weekly_rewards": 131550,
+      "monthly_rewards": 545489.02,
+      "leaderboard_score_week": 64,
+      "leaderboard_score_month": 78,
+      "is_public": true,
+      "is_published": true,
+      "published_at": "2026-02-06T20:19:03.331Z",
+      "nft_image_url": "ipfs://bafybeiasznk4v6nb4pb5v2euu44tmvyumnmlrlcgw5acphex46mp2yp2ee",
+      "avatar_image_url": "https://pft-ipfs-testnet-node-1.fly.dev/ipfs/bafybeiasznk4v6nb4pb5v2euu44tmvyumnmlrlcgw5acphex46mp2yp2ee"
+    },
+    {
+      "operator_id": "7271c454-3b39-4c08-8bbc-3049cdf2df53",
+      "wallet_address": "rPo8GkCA9YMKzuJGTHbj11kdVfPqSJHxNx",
+      "wallet_label": "Wallet",
+      "summary": "Blockchain validator LLM optimization engineer",
+      "capabilities": [
+        "Design and implement Sybil-resistance and reputation scoring algorithms.",
+        "Audit and deploy L1 blockchain validator infrastructure and networking.",
+        "Optimize LLM context windows and retrieval logic for large-scale datasets.",
+        "Develop and configure custom AI agents for user onboarding and support.",
+        "Manage versioned IP repositories and technical documentation pipelines."
+      ],
+      "expert_knowledge": [
+        {
+          "domain": "Blockchain infrastructure engineering",
+          "confidence": "High"
+        },
+        {
+          "domain": "Algorithmic reputation scoring",
+          "confidence": "High"
+        },
+        {
+          "domain": "LLM context window optimization",
+          "confidence": "High"
+        },
+        {
+          "domain": "Network protocol debugging",
+          "confidence": "High"
+        },
+        {
+          "domain": "Full-stack software development",
+          "confidence": "High"
+        },
+        {
+          "domain": "DevOps and CI/CD workflows",
+          "confidence": "Medium"
+        },
+        {
+          "domain": "AI agent configuration",
+          "confidence": "Medium"
+        },
+        {
+          "domain": "Technical product specification",
+          "confidence": "Medium"
+        }
+      ],
+      "sybil_score": 100,
+      "sybil_risk": "Low Risk",
+      "linked_accounts": [
+        "github",
+        "x"
+      ],
+      "alignment_score": 90,
+      "alignment_tier": "Active Contributor",
+      "weekly_tasks": 6,
+      "monthly_tasks": 43,
+      "weekly_rewards": 42725,
+      "monthly_rewards": 293787.5,
+      "leaderboard_score_week": 72,
+      "leaderboard_score_month": 76,
+      "is_public": true,
+      "is_published": true,
+      "published_at": "2026-02-03T20:07:47.324Z",
+      "nft_image_url": "ipfs://bafybeihlfj7fl4f7jmewd47fpjkoxebav2w5nyyxlmrbsd5fncts4rpbpa",
+      "avatar_image_url": "https://pft-ipfs-testnet-node-1.fly.dev/ipfs/bafybeihlfj7fl4f7jmewd47fpjkoxebav2w5nyyxlmrbsd5fncts4rpbpa"
+    },
+    {
+      "operator_id": "bcd75fca-2269-4872-a73c-b1a629ff8fc7",
+      "wallet_address": "rQhV9rE7cs5zgFZohjVjjbwqcMkwpLb9rE",
+      "wallet_label": null,
+      "summary": "Private equity diligence blockchain validator",
+      "capabilities": [
+        "Perform investment due diligence and valuation benchmarking (EBITDA multiples, transaction comps).",
+        "Conduct AI-powered market research and TAM/SAM/SOM analysis for investment thesis development.",
+        "Design and build operational sales dashboards with dynamic backlog and revenue pipeline tracking.",
+        "Deploy and integrate live blockchain validator status dashboards using RPC and Explorer APIs.",
+        "Develop proprietary deal sourcing networks and targeted investment banking outreach strategies."
+      ],
+      "expert_knowledge": [
+        {
+          "domain": "Private equity investment diligence",
+          "confidence": null
+        },
+        {
+          "domain": "Financial valuation benchmarking",
+          "confidence": null
+        },
+        {
+          "domain": "Portfolio company operational reporting",
+          "confidence": null
+        },
+        {
+          "domain": "Market research and TAM analysis",
+          "confidence": null
+        },
+        {
+          "domain": "Deal sourcing and intermediary networking",
+          "confidence": null
+        },
+        {
+          "domain": "Blockchain validator infrastructure",
+          "confidence": null
+        }
+      ],
+      "sybil_score": 83,
+      "sybil_risk": "Low Risk",
+      "linked_accounts": [],
+      "alignment_score": 93,
+      "alignment_tier": "Active Contributor",
+      "weekly_tasks": 9,
+      "monthly_tasks": 34,
+      "weekly_rewards": 66400,
+      "monthly_rewards": 248150,
+      "leaderboard_score_week": 74,
+      "leaderboard_score_month": 75,
+      "is_public": true,
+      "is_published": false,
+      "published_at": null,
+      "nft_image_url": "ipfs://bafybeicftgii5hadajdszwsf6lrtz7jvhxqbyyfg46keam7ggqgvedcsqq",
+      "avatar_image_url": null
+    },
+    {
+      "operator_id": "d6453c54-94b1-467d-a376-6512130cc779",
+      "wallet_address": "rnmLkDT2SBeaFA5z2ogdUCbJ2GMzn2sLLu",
+      "wallet_label": "Main wallet",
+      "summary": "Discord bot LLM NFT developer",
+      "capabilities": [
+        "Develop Discord bots with complex slash command architectures and interactive UI modules.",
+        "Integrate LLM APIs (OpenRouter) with parallel execution and multi-model response aggregation.",
+        "Build structured data ingestion layers with local JSON/database storage for financial and sentiment tracking.",
+        "Implement intelligent message listeners for bot self-parsing and context-aware LLM analysis.",
+        "Design and deploy automated NFT minting agents with direct blockchain/testnet integration."
+      ],
+      "expert_knowledge": [
+        {
+          "domain": "Discord bot architecture",
+          "confidence": "High"
+        },
+        {
+          "domain": "LLM API orchestration",
+          "confidence": "High"
+        },
+        {
+          "domain": "Full-stack JavaScript development",
+          "confidence": "High"
+        },
+        {
+          "domain": "Structured data ingestion",
+          "confidence": "High"
+        },
+        {
+          "domain": "Financial trade journaling systems",
+          "confidence": "Medium"
+        },
+        {
+          "domain": "NFT minting workflows",
+          "confidence": "Medium"
+        },
+        {
+          "domain": "Context window management",
+          "confidence": "Medium"
+        }
+      ],
+      "sybil_score": 89,
+      "sybil_risk": "Low Risk",
+      "linked_accounts": [
+        "github",
+        "x"
+      ],
+      "alignment_score": 82,
+      "alignment_tier": "Active Contributor",
+      "weekly_tasks": 10,
+      "monthly_tasks": 73,
+      "weekly_rewards": 67300,
+      "monthly_rewards": 479300,
+      "leaderboard_score_week": 67,
+      "leaderboard_score_month": 74,
+      "is_public": true,
+      "is_published": true,
+      "published_at": "2026-02-25T01:22:12.557Z",
+      "nft_image_url": "ipfs://bafybeidscrink7tkkmckjvfsf663xvek67ezc6brciijn6j4moyjuxaxta",
+      "avatar_image_url": "https://pft-ipfs-testnet-node-1.fly.dev/ipfs/bafybeidscrink7tkkmckjvfsf663xvek67ezc6brciijn6j4moyjuxaxta"
+    },
+    {
+      "operator_id": "a96c9b78-f2c0-41d3-bf56-861b1fc102f9",
+      "wallet_address": "r4r2Kfe7hH72gb1owkkrWa9miHE9n3xJi4",
+      "wallet_label": "PFT Wallet 2",
+      "summary": "Large-scale public infrastructure partnership strategist",
+      "capabilities": [
+        "Design lead and strategic project management for large-scale public infrastructure projects.",
+        "Drafting technical decision frameworks and trade-off analysis for executive leadership.",
+        "Diplomatic stakeholder management and multi-party partnership orchestration.",
+        "Development of business development 'pre-filter' tools for strategic firm teaming.",
+        "Technical environment setup and AI-assisted workflow automation (Node.js, Claude CLI)."
+      ],
+      "expert_knowledge": [
+        {
+          "domain": "Landscape architecture and urban design",
+          "confidence": "High"
+        },
+        {
+          "domain": "Public sector project management",
+          "confidence": "High"
+        },
+        {
+          "domain": "Strategic partnership and teaming frameworks",
+          "confidence": "High"
+        },
+        {
+          "domain": "Stakeholder diplomacy and consensus building",
+          "confidence": "High"
+        },
+        {
+          "domain": "Security and facilities infrastructure planning",
+          "confidence": "Medium"
+        },
+        {
+          "domain": "AI-assisted development workflows",
+          "confidence": "Medium"
+        }
+      ],
+      "sybil_score": 76,
+      "sybil_risk": "Moderate",
+      "linked_accounts": [
+        "github",
+        "x"
+      ],
+      "alignment_score": 88,
+      "alignment_tier": "Active Contributor",
+      "weekly_tasks": 16,
+      "monthly_tasks": 37,
+      "weekly_rewards": 93975,
+      "monthly_rewards": 222925,
+      "leaderboard_score_week": 69,
+      "leaderboard_score_month": 71,
+      "is_public": true,
+      "is_published": true,
+      "published_at": "2026-02-25T03:24:15.751Z",
+      "nft_image_url": "ipfs://bafybeiezzdgob7m3kcu6fdhvtd7pfgchuapqbbr5x64bxzqxsoy6gfogiu",
+      "avatar_image_url": "https://pft-ipfs-testnet-node-1.fly.dev/ipfs/bafybeiezzdgob7m3kcu6fdhvtd7pfgchuapqbbr5x64bxzqxsoy6gfogiu"
+    },
+    {
+      "operator_id": "6433ab93-921f-465d-a924-2202ec0e972a",
+      "wallet_address": "rpyTMcAKiCxqY7VXenD5ercGGzGWNV9xpg",
+      "wallet_label": "Wallet",
+      "summary": "AI marketing intelligence pipeline builder",
+      "capabilities": [
+        "Build AI-native competitive intelligence pipelines for brand positioning and ad creative.",
+        "Design and deploy automated workflows for multi-channel ad copy and creative brief generation.",
+        "Execute paid social media campaigns (TikTok/Meta) with AI-optimized assets and targeting.",
+        "Synthesize proprietary market intelligence into structured reports for private equity and UHNW sectors.",
+        "Develop and deploy responsive web interfaces for technical infrastructure and node operations."
+      ],
+      "expert_knowledge": [
+        {
+          "domain": "AI-native marketing operations",
+          "confidence": "High"
+        },
+        {
+          "domain": "Private equity market intelligence",
+          "confidence": "High"
+        },
+        {
+          "domain": "LLM prompt engineering",
+          "confidence": "High"
+        },
+        {
+          "domain": "E-commerce growth strategy",
+          "confidence": "High"
+        },
+        {
+          "domain": "Automated competitive intelligence",
+          "confidence": "Medium"
+        },
+        {
+          "domain": "Paid social campaign optimization",
+          "confidence": "Medium"
+        },
+        {
+          "domain": "UHNW client servicing",
+          "confidence": "Medium"
+        },
+        {
+          "domain": "AI-generated creative workflows",
+          "confidence": "Medium"
+        }
+      ],
+      "sybil_score": 84,
+      "sybil_risk": "Low Risk",
+      "linked_accounts": [
+        "github",
+        "x"
+      ],
+      "alignment_score": 65,
+      "alignment_tier": "Contributor",
+      "weekly_tasks": 19,
+      "monthly_tasks": 48,
+      "weekly_rewards": 126290,
+      "monthly_rewards": 292699.5,
+      "leaderboard_score_week": 60,
+      "leaderboard_score_month": 58,
+      "is_public": true,
+      "is_published": true,
+      "published_at": "2026-02-02T01:07:35.453Z",
+      "nft_image_url": "ipfs://bafybeid4mflzd7esc7vpr6bty27v3zsf72ezdexfggywenyvcgnqz6mjvu",
+      "avatar_image_url": "https://pft-ipfs-testnet-node-1.fly.dev/ipfs/bafybeid4mflzd7esc7vpr6bty27v3zsf72ezdexfggywenyvcgnqz6mjvu"
+    },
+    {
+      "operator_id": "b16a5ec2-d069-4f8d-af48-0f4b1f686196",
+      "wallet_address": "r9oHNN143VkaVeQ5kfQnRyc9gwL8HhSa32",
+      "wallet_label": null,
+      "summary": "DeFi auditor technical sales engineer",
+      "capabilities": [
+        "DeFi protocol shadow auditing and liveness risk assessment",
+        "Technical sales engineering for CTO-level architectural objections",
+        "Smart contract vulnerability analysis (Oracle latency, staleness, and L2 sequencer risks)",
+        "Design and development of interactive React dashboards for financial decision-making",
+        "Macroeconomic risk modeling and capital allocation framework design"
+      ],
+      "expert_knowledge": [
+        {
+          "domain": "DeFi protocol security analysis",
+          "confidence": null
+        },
+        {
+          "domain": "Blockchain oracle architecture",
+          "confidence": null
+        },
+        {
+          "domain": "Technical sales engineering",
+          "confidence": null
+        },
+        {
+          "domain": "Macroeconomic risk modeling",
+          "confidence": null
+        },
+        {
+          "domain": "L2 sequencer and liveness risk",
+          "confidence": null
+        },
+        {
+          "domain": "Real-time on-chain monitoring",
+          "confidence": null
+        }
+      ],
+      "sybil_score": 75,
+      "sybil_risk": "Moderate",
+      "linked_accounts": [],
+      "alignment_score": 62,
+      "alignment_tier": "Contributor",
+      "weekly_tasks": 13,
+      "monthly_tasks": 41,
+      "weekly_rewards": 80081.25,
+      "monthly_rewards": 300593.75,
+      "leaderboard_score_week": 54,
+      "leaderboard_score_month": 55,
+      "is_public": true,
+      "is_published": false,
+      "published_at": null,
+      "nft_image_url": "ipfs://bafybeigu7gmxiv552ies2v5nebvq7zs44f27vzdv4hh5cq6loxelndsuqa",
+      "avatar_image_url": null
+    },
+    {
+      "operator_id": "ac9d9f3e-41ae-4476-82de-af4c5afef71d",
+      "wallet_address": "rfo5PXejjp6xA4H8cNhodhkfz9tHLMCVNx",
+      "wallet_label": "Wallet Main",
+      "summary": "Crypto capital allocation research analyst",
+      "capabilities": [
+        "Design and deploy risk-adjusted capital allocation frameworks for crypto networks.",
+        "Conduct deep-dive investment research and memos for DePIN and AI sectors.",
+        "Perform DeFi portfolio optimization and migration analysis across yield protocols.",
+        "Develop programmable logic maps and algorithmic scoring for autonomous venture agents.",
+        "Execute historical backtesting for investment strategies with PnL and signal validation."
+      ],
+      "expert_knowledge": [
+        {
+          "domain": "DePIN and AI sector analysis",
+          "confidence": "High"
+        },
+        {
+          "domain": "DeFi yield optimization strategies",
+          "confidence": "High"
+        },
+        {
+          "domain": "Crypto asset capital allocation",
+          "confidence": "High"
+        },
+        {
+          "domain": "Algorithmic investment backtesting",
+          "confidence": "High"
+        },
+        {
+          "domain": "Tokenomics and liquidity modeling",
+          "confidence": "High"
+        },
+        {
+          "domain": "Venture capital investment memo writing",
+          "confidence": "Medium"
+        },
+        {
+          "domain": "Risk-adjusted portfolio rebalancing",
+          "confidence": "Medium"
+        }
+      ],
+      "sybil_score": 88,
+      "sybil_risk": "Low Risk",
+      "linked_accounts": [
+        "github",
+        "x"
+      ],
+      "alignment_score": 60,
+      "alignment_tier": "Contributor",
+      "weekly_tasks": 11,
+      "monthly_tasks": 36,
+      "weekly_rewards": 85600,
+      "monthly_rewards": 241350,
+      "leaderboard_score_week": 55,
+      "leaderboard_score_month": 54,
+      "is_public": true,
+      "is_published": true,
+      "published_at": "2026-02-11T10:24:05.100Z",
+      "nft_image_url": "ipfs://bafybeidqed3vtk2uhi3psvmfhjppvlyjncyl3zsypjbxznr6gdbukfdncy",
+      "avatar_image_url": "https://pft-ipfs-testnet-node-1.fly.dev/ipfs/bafybeidqed3vtk2uhi3psvmfhjppvlyjncyl3zsypjbxznr6gdbukfdncy"
+    }
+  ],
+  "network_tasks": [
+    {
+      "task_id": "afeaf6b5-01b9-454c-937a-536de823ab6a",
+      "title": "Create Complete LinkedIn Outreach Strategy Document",
+      "type": "personal",
+      "status": "in_progress",
+      "requirements": "Upload the complete outreach strategy document containing all four sections: Overview, Scripts (3 messages), Target List (30-50 named leads with search criteria), and Cadence (daily/weekly execution plan).",
+      "verification_ask": null,
+      "verification_status": null,
+      "pft_offer": 2200,
+      "reward_tier": null,
+      "reward_score": null,
+      "reward_summary": null,
+      "created_at_ms": 1769844251636,
+      "accepted_at_ms": 1769844285269,
+      "submitted_at_ms": null,
+      "rewarded_at_ms": null,
+      "submission_id": null,
+      "tx_hash": null,
+      "refusal_category": null,
+      "reason": null
+    },
+    {
+      "task_id": "c78fb889-679d-4ad2-a8a2-46b5d1a0f2de",
+      "title": "Draft Technical Spec for the Hive Mind Routing Agent",
+      "type": "network",
+      "status": "refused",
+      "requirements": "A public link (Notion, HackMD, GitHub Gist) to the completed technical specification document detailing the data schema, matching logic, and API integration points.",
+      "verification_ask": null,
+      "verification_status": null,
+      "pft_offer": 1500,
+      "reward_tier": null,
+      "reward_score": null,
+      "reward_summary": null,
+      "created_at_ms": 1771977450509,
+      "accepted_at_ms": null,
+      "submitted_at_ms": null,
+      "rewarded_at_ms": null,
+      "submission_id": null,
+      "tx_hash": null,
+      "refusal_category": "missing_info",
+      "reason": null
+    },
+    {
+      "task_id": "a06e7735-cb18-4c32-92c5-9d1ec754271b",
+      "title": "Implement Core Matching Algorithm MVP for Routing Agent",
+      "type": "network",
+      "status": "rewarded",
+      "requirements": "A link to the GitHub commit containing the executable matching algorithm code that successfully processes the sample dataset and outputs ranked MatchResults.",
+      "verification_ask": "Run `src/matcher.mjs` and paste the terminal output of a ranked `MatchResult`. In one sentence, how did the top operator's Sybil and Alignment scores specifically impact their final rank?",
+      "verification_status": "response_submitted",
+      "pft_offer": 10000,
+      "reward_tier": "exceptional",
+      "reward_score": 96,
+      "reward_summary": "Exceptional implementation of the core matching algorithm for the Routing Agent. The submission successfully translates the theoretical Sybil and Alignment scoring mechanisms into executable, deterministic code.",
+      "created_at_ms": 1772139025509,
+      "accepted_at_ms": 1772139305278,
+      "submitted_at_ms": 1772139932040,
+      "rewarded_at_ms": 1772140254291,
+      "submission_id": "5c5e8244-ad87-4406-8a2a-9fa83b5f814a",
+      "tx_hash": "3A3517EB3F0A54EECB6E2BC0CAF08CCFCE5C78D78F9449F3DF1822BA47FBE39F",
+      "refusal_category": null,
+      "reason": null
+    },
+    {
+      "task_id": "574e6a63-e86a-4a75-9901-b610b3a086e1",
+      "title": "Scaffold Routing Agent Repository and Document Matching Logic",
+      "type": "network",
+      "status": "rewarded",
+      "requirements": "A public GitHub repository URL containing the initialized project structure, a README, and a matching-logic.md file detailing the pseudocode algorithm.",
+      "verification_ask": "In your matching algorithm pseudocode, exactly how are the sybil/alignment scores weighted against the expert tags when ranking operators? Please paste the specific snippet of pseudocode from your documentation that handles this calculation.",
+      "verification_status": "response_submitted",
+      "pft_offer": 10000,
+      "reward_tier": "exceptional",
+      "reward_score": 96,
+      "reward_summary": "Exceptional contribution establishing the core routing logic for the Hive Mind agent. The pseudocode demonstrates a deep understanding of Post Fiat's alignment and sybil resistance mechanics, translating them into a viable ranking algorithm.",
+      "created_at_ms": 1772138112669,
+      "accepted_at_ms": 1772138387357,
+      "submitted_at_ms": 1772138719019,
+      "rewarded_at_ms": 1772138911808,
+      "submission_id": "1248f87a-6351-4953-83cc-fea8bdc5a954",
+      "tx_hash": "B61F133005168756800481BBE09BC91451E831ECCC09932CC7B6C875F2C1A11A",
+      "refusal_category": null,
+      "reason": null
+    },
+    {
+      "task_id": "73e9a24f-e8e7-4ecb-83d6-c4a35bdd0f4f",
+      "title": "Build Sample JSON Dataset for the Hive Mind Routing Agent",
+      "type": "network",
+      "status": "rewarded",
+      "requirements": "A publicly accessible link (GitHub Gist or public repository) to the `sample-data.json` file containing the populated records.",
+      "verification_ask": "Looking at the 5 MatchResults in your JSON, which Operator-Task pairing yielded the highest match confidence score, and which specific 'Expert Knowledge' tags drove that successful match?",
+      "verification_status": "response_submitted",
+      "pft_offer": 3750,
+      "reward_tier": "very_good",
+      "reward_score": 90,
+      "reward_summary": "Exceptional execution of a test harness dataset for the Hive Mind Routing Agent. The submission included highly realistic, Post Fiat-specific data and the verification response proved intimate knowledge of the matching logic and data structure.",
+      "created_at_ms": 1772137025821,
+      "accepted_at_ms": 1772137307956,
+      "submitted_at_ms": 1772137609016,
+      "rewarded_at_ms": 1772137915910,
+      "submission_id": "aeafefe7-1771-4a64-a757-40725f305b0c",
+      "tx_hash": "A32A8619D5D0C76A2B6BC5B9E9FE350F885A7E5C21D2A33D94B1583D9FD43BC1",
+      "refusal_category": null,
+      "reason": null
+    },
+    {
+      "task_id": "503c037a-54bd-4131-b822-3c7b4ea5a23a",
+      "title": "Draft Data Schemas for the Post Fiat Routing Agent",
+      "type": "network",
+      "status": "rewarded",
+      "requirements": "A publicly accessible link (GitHub Gist, HackMD, or Notion) containing the completed schema definitions for all three required models with field-level documentation.",
+      "verification_ask": "How does your `MatchResult` schema reference the `expert_knowledge` and `alignment_score` from the `OperatorProfile` to justify its routing confidence score? Briefly explain the relationship or paste the relevant JSON snippet.",
+      "verification_status": "response_submitted",
+      "pft_offer": 3750,
+      "reward_tier": "exceptional",
+      "reward_score": 97,
+      "reward_summary": "Exceptional protocol contribution. The user successfully translated live network data into highly structured, production-ready schemas for the routing agent. The verification response proved a deep understanding of how operator attributes mathematically justify routing confidence.",
+      "created_at_ms": 1772135828382,
+      "accepted_at_ms": 1772135852140,
+      "submitted_at_ms": 1772136533752,
+      "rewarded_at_ms": 1772136704844,
+      "submission_id": "ee2bf5de-91e6-4633-9d8d-ee399ef1ee02",
+      "tx_hash": "5AB6587125C4E131CF6E45C29E0E9BEAD474069788757A3BF0E97C9F5F4017F3",
+      "refusal_category": null,
+      "reason": null
+    },
+    {
+      "task_id": "6432be54-690e-44a9-9c6d-fd4e1da43e34",
+      "title": "Audit and Map Post Fiat Network Operator Data Schema",
+      "type": "network",
+      "status": "rewarded",
+      "requirements": "A public link (GitHub Gist, HackMD, or public Notion) to the completed `network-data-audit.md` file containing the mapped fields, inferred data types, and example values.",
+      "verification_ask": "Please paste the specific snippet from your markdown file showing exactly how you mapped the 'Expert Knowledge' tags. Include the inferred data types and the real example values you found for confidence levels and domains.",
+      "verification_status": "response_submitted",
+      "pft_offer": 2500,
+      "reward_tier": "exceptional",
+      "reward_score": 93,
+      "reward_summary": "Exceptional contribution mapping the live operator data schema. The verification response proves the user successfully extracted real domain knowledge and confidence levels, structuring them perfectly for the Hive Mind Routing Agent.",
+      "created_at_ms": 1771980103364,
+      "accepted_at_ms": 1771980205706,
+      "submitted_at_ms": 1771998823794,
+      "rewarded_at_ms": 1771999097469,
+      "submission_id": "0c79c210-4d25-43a2-abd1-fe8629e0a5b4",
+      "tx_hash": "168284831E8B8B88A1E27D212ACE838ACC7D9A1BED5DC65B5FC499C96DEFFB04",
+      "refusal_category": null,
+      "reason": null
+    },
+    {
+      "task_id": "4ac8c0c1-410e-4035-80fb-27b2560727b2",
+      "title": "Produce and Export Final Refinance Video Ad for Meta Upload",
+      "type": "personal",
+      "status": "rewarded",
+      "requirements": "Screenshot of Meta Ads Manager showing the new refinance video ad in 'Active' or 'In Review' status, with the ad preview visible displaying your hook caption text and the video thumbnail clearly showing this is a different creative from your previous refinance ad.",
+      "verification_ask": "The screenshots show a strong hook ('Three banks are competing...'). What specific Call to Action (CTA) text and visual cue did you use in the final 5 seconds of the video to actually drive the click?",
+      "verification_status": "response_submitted",
+      "pft_offer": 4200,
+      "reward_tier": "very_good",
+      "reward_score": 88,
+      "reward_summary": "Strong execution of the video ad production with excellent marketing copy and visual planning. The submission is nearly perfect, though the ad was left in draft status rather than being published for review.",
+      "created_at_ms": 1771901886191,
+      "accepted_at_ms": 1771903104435,
+      "submitted_at_ms": 1771992284929,
+      "rewarded_at_ms": 1771993868543,
+      "submission_id": "a4da18f7-da18-4c85-91e8-ff564e0d3f78",
+      "tx_hash": "7A9C25C3693E89BA384770EBEEE2D0EB23F691CADF98ED8E65044EC00D8F4CD3",
+      "refusal_category": null,
+      "reason": null
+    },
+    {
+      "task_id": "5045f19b-6dee-4e24-a575-141ba77a7c29",
+      "title": "Create Refinance Video Ad Script and Scene Plan Document",
+      "type": "personal",
+      "status": "rewarded",
+      "requirements": "Upload the complete ad production plan document (PDF, DOCX, or MD) showing all four sections: Hook Options (3 alternatives), Final Script (full 30-second copy), Scene Breakdown (4-6 image/visual descriptions), and Caption Overlay Plan with text for each scene.",
+      "verification_ask": "The uploaded file appears to be a lead purchase contract, not the requested ad script. Please paste the 3 alternative hooks you wrote for the 'Hook Options' section.",
+      "verification_status": "response_submitted",
+      "pft_offer": 6000,
+      "reward_tier": "exceptional",
+      "reward_score": 95,
+      "reward_summary": "The user initially uploaded the wrong file (a contract) but provided the complete, high-quality production plan in the verification response. The script is excellent, specific to the target market, and ready for production.",
+      "created_at_ms": 1771897604883,
+      "accepted_at_ms": 1771899400238,
+      "submitted_at_ms": 1771901021637,
+      "rewarded_at_ms": 1771901611362,
+      "submission_id": "9e093385-6002-4894-bbbd-3ae279bdb6fb",
+      "tx_hash": "B3E46FABF01128F64A9EE24B2FD93487173F3D963DB6C36C6D0232C2B2A84EAC",
+      "refusal_category": null,
+      "reason": null
+    },
+    {
+      "task_id": "3db3fad4-ca99-47ee-9042-7668a6336838",
+      "title": "Build XLeads Path to $10K Profit Model Spreadsheet",
+      "type": "personal",
+      "status": "rewarded",
+      "requirements": "Screenshot of the completed spreadsheet showing all five sections: Lead Volume Targets by vertical, Daily Ad Spend Targets, Current Adviser Count, Required Adviser Count, and the calculated Gap with specific numbers visible.",
+      "verification_ask": "Paste the formula from the 'Required Adviser Count' cell. Did you use a rounding function (like ROUNDUP) to ensure you don't plan for fractional hires?",
+      "verification_status": "response_submitted",
+      "pft_offer": 6000,
+      "reward_tier": "exceptional",
+      "reward_score": 98,
+      "reward_summary": "Exceptional submission. The dashboard meets all requirements, and the verification response provides specific mathematical context that only the creator would know. The logic used to determine adviser gaps is sound and well-explained.",
+      "created_at_ms": 1771895197295,
+      "accepted_at_ms": 1771895291897,
+      "submitted_at_ms": 1771895978745,
+      "rewarded_at_ms": 1771896116688,
+      "submission_id": "6f5b0e12-1288-42db-947a-74de700f17b5",
+      "tx_hash": "B3C3DFA7611AC71229FB5C4604DED6CFF276E462429293C7D36D59CA09DB8DA0",
+      "refusal_category": null,
+      "reason": null
+    },
+    {
+      "task_id": "2de838b6-331f-4736-9bb0-06672b2575c1",
+      "title": "Create and Launch 30-Second Refinance Ad Video",
+      "type": "personal",
+      "status": "rewarded",
+      "requirements": "Screenshot of Meta Ads Manager showing the new 30-second refinance video ad in 'Active' or 'In Review' status, with the ad preview visible showing your hook text/caption and the campaign name indicating refinance targeting.",
+      "verification_ask": "Your screenshot shows the opening hook, but not the end of the video. What specific text is burned-in for the Call to Action (CTA)?",
+      "verification_status": "response_submitted",
+      "pft_offer": 6000,
+      "reward_tier": "exceptional",
+      "reward_score": 93,
+      "reward_summary": "Strong submission. The user launched the ad as required. Although the screenshot framing was slightly off (missing the preview pane), the verification response revealed a clever, well-thought-out creative strategy that confirms high-quality execution.",
+      "created_at_ms": 1771460307856,
+      "accepted_at_ms": 1771460436219,
+      "submitted_at_ms": 1771881774850,
+      "rewarded_at_ms": 1771882029121,
+      "submission_id": "2b199eb8-f720-4cb9-84fb-83f186b496e9",
+      "tx_hash": "C49C135742C96EBB2705C169FDF5C6D08ADB6556DBEB057E4FAE7F35886F35F3",
+      "refusal_category": null,
+      "reason": null
+    },
+    {
+      "task_id": "0cf0ce9e-1c17-4a05-87b3-f3eb20673ef8",
+      "title": "Implement Meta CAPI Offline Conversion for Delivered Leads",
+      "type": "personal",
+      "status": "rewarded",
+      "requirements": "Screenshot of Meta Events Manager showing the new server-side conversion event received with the value parameter visible and a timestamp from today, confirming the CAPI integration is live and firing correctly.",
+      "verification_ask": "Your screenshot shows a 'Browser' event with 0 value, but the task requires a server-side CAPI event with specific revenue. Please paste the code snippet from your webhook handler that calculates the revenue based on lead tier ($165/$140/$115) and sends the request to Meta.",
+      "verification_status": "response_submitted",
+      "pft_offer": 800,
+      "reward_tier": "below_average",
+      "reward_score": 35,
+      "reward_summary": "The submission includes code that looks correct for a CAPI wrapper, but the visual evidence contradicts the task requirements. The screenshot shows a standard Browser pixel event with $0 value, proving the Server-side integration is either not working or was not verified correctly. Partial credit awarded for the coding effort.",
+      "created_at_ms": 1771386868225,
+      "accepted_at_ms": 1771387348347,
+      "submitted_at_ms": 1771388869690,
+      "rewarded_at_ms": 1771389007556,
+      "submission_id": "49cc4cfc-63a4-4f9d-844b-8379d98a3ea8",
+      "tx_hash": "04E55921FEDA02BD9601B3AFB30649BE970423F4E3CD6A069E4CF480F22BEB9E",
+      "refusal_category": null,
+      "reason": null
+    },
+    {
+      "task_id": "30a20b33-2755-4eda-a2f1-122be26a15b7",
+      "title": "Create Refer for Trades Opportunity Brief Document",
+      "type": "personal",
+      "status": "rewarded",
+      "requirements": "Upload the 'Refer for Trades Opportunity Brief' (PDF or DOCX) containing all four sections: Market Sizing with TAM estimate, Competitive Landscape analysis, Unit Economics model, and Validation Plan with 10 named contacts.",
+      "verification_ask": "Based on the Unit Economics model in your brief, what is the estimated break-even number of referrals a tradie needs per quarter to cover the $997 fee?",
+      "verification_status": "response_submitted",
+      "pft_offer": 7000,
+      "reward_tier": "exceptional",
+      "reward_score": 100,
+      "reward_summary": "This is a perfect submission. The user performed actual due diligence, identifying that the suggested pricing model ($997) would fail for lower-margin trades (plumbers) and proactively adjusted the strategy to $497. The distinction between revenue and profit margin demonstrates high-level business acumen.",
+      "created_at_ms": 1771380903986,
+      "accepted_at_ms": 1771381632034,
+      "submitted_at_ms": 1771382280426,
+      "rewarded_at_ms": 1771382507105,
+      "submission_id": "2775f8b2-9976-49af-be74-b3833e7fcad9",
+      "tx_hash": "D9B689D3A62F43FBCC83D1F55585FD523A1F60F628E6B67ABE4F294A92C8F805",
+      "refusal_category": null,
+      "reason": null
+    },
+    {
+      "task_id": "898ffeb3-7ab3-4fe6-92ef-ec39a1ba0fcd",
+      "title": "Create Monthly Situation Report for Lead Generation Business",
+      "type": "personal",
+      "status": "rewarded",
+      "requirements": "Upload the Monthly Situation Report (PDF or spreadsheet) showing: (1) Historical data table with Mortgage and Insurance revenue/costs separated, (2) Calculated unit economics (CPL, AOV, margin %), and (3) Next month projection with assumptions stated.",
+      "verification_ask": "Based on the Unit Economics summary in your report, what are the specific Gross Margin % values for Mortgage vs. Insurance, and which vertical currently has the higher Cost Per Lead?",
+      "verification_status": "response_submitted",
+      "pft_offer": 8000,
+      "reward_tier": "exceptional",
+      "reward_score": 100,
+      "reward_summary": "Exceptional work. The user not only compiled the report but demonstrated a deep understanding of the unit economics, correctly identifying the root cause of the margin variance between verticals. The verification response was precise and insightful.",
+      "created_at_ms": 1771204971723,
+      "accepted_at_ms": 1771205020425,
+      "submitted_at_ms": 1771214290474,
+      "rewarded_at_ms": 1771214641375,
+      "submission_id": "63a45539-b190-48c2-9539-9b4bf52535ea",
+      "tx_hash": "B6D58BE7AD5267511EEB93F347EF833F67CF95C9FCF15A041D83B65F793C8A21",
+      "refusal_category": null,
+      "reason": null
+    },
+    {
+      "task_id": "209a7ca8-643c-419e-8be5-0cc1c28c9681",
+      "title": "Analyze FHB Ad Performance Data and Create Scaling Strategy Document",
+      "type": "personal",
+      "status": "rewarded",
+      "requirements": "Upload the scaling strategy document (PDF, DOCX, or Markdown) showing all three sections: Performance Summary with actual metrics from your FHB campaign, Identified Bottleneck analysis, and Scaling Plan with specific next actions and decision thresholds.",
+      "verification_ask": "What is the specific CPL threshold you defined in the document that triggers a budget increase, and how does it compare to your current actual CPL?",
+      "verification_status": "response_submitted",
+      "pft_offer": 8000,
+      "reward_tier": "exceptional",
+      "reward_score": 100,
+      "reward_summary": "This is a perfect submission. The user not only analyzed the data but demonstrated sophisticated judgment by identifying that their current low CPL was based on insufficient volume. The scaling strategy is grounded in solid unit economics ($15 threshold for 67% margin).",
+      "created_at_ms": 1770753214132,
+      "accepted_at_ms": 1770753622933,
+      "submitted_at_ms": 1770757930113,
+      "rewarded_at_ms": 1770758083522,
+      "submission_id": "44faa6c3-842d-4222-b27b-ad50cde12fef",
+      "tx_hash": "53DB2A60242D891306E2B46072A01A3D7A18705E557EE808DCC47B5357C916C3",
+      "refusal_category": null,
+      "reason": null
+    },
+    {
+      "task_id": "6470a615-dddc-4f6d-b7ae-9336575803e7",
+      "title": "Configure Two New Client Profiles in Lead Exec for Lead Distribution",
+      "type": "personal",
+      "status": "rewarded",
+      "requirements": "Screenshot of Lead Exec dashboard showing both new client profiles with 'Active' status visible, displaying their names/business names and configured distribution settings.",
+      "verification_ask": "What specific geographic targeting or volume cap settings did you configure for the Insurance client profile (since only the Mortgage profile is visible in the screenshot)?",
+      "verification_status": "response_submitted",
+      "pft_offer": 4500,
+      "reward_tier": "good",
+      "reward_score": 72,
+      "reward_summary": "The user successfully configured the Mortgage profile and provided strong text evidence for the Insurance profile. However, the submission failed the specific instruction to provide a screenshot showing *both* profiles, resulting in a lower scope score. The verification response was detailed and credible.",
+      "created_at_ms": 1770701033474,
+      "accepted_at_ms": 1770707266517,
+      "submitted_at_ms": 1770707734557,
+      "rewarded_at_ms": 1770708010707,
+      "submission_id": "ea1c6f1e-b750-4423-b023-e7cef761dd8c",
+      "tx_hash": "D773C0F5BC005C0C4FA6A85B1106D8DF3FFFF4EF4A7951712DF5508902FCDE60",
+      "refusal_category": null,
+      "reason": null
+    },
+    {
+      "task_id": "5e108a48-ddba-44c2-884d-7b4f9dd288b2",
+      "title": "Write Ad Copy and Launch First Home Buyer Campaign on Meta",
+      "type": "personal",
+      "status": "rewarded",
+      "requirements": "Screenshot of Meta Ads Manager showing the first home buyer ad with 'Active' or 'In Review' status, with the ad preview visible showing your headline, primary text, and video thumbnail.",
+      "verification_ask": "Paste the other two headline variations you drafted (as requested in step 1) and indicate which one you plan to A/B test next.",
+      "verification_status": "response_submitted",
+      "pft_offer": 2500,
+      "reward_tier": "average",
+      "reward_score": 57,
+      "reward_summary": "The submission features strong ad copy and a solid strategic rationale in the verification response. However, the claim that 'Today is 2026' indicates a simulation or roleplay rather than a real campaign launch, and the lack of visible screenshots prevents verification of the ad setup. Reward reflects the quality of the copy and strategy, discounted for the lack of a verifiable launch.",
+      "created_at_ms": 1770693594203,
+      "accepted_at_ms": 1770693621163,
+      "submitted_at_ms": 1770697317680,
+      "rewarded_at_ms": 1770697439042,
+      "submission_id": "4eac6aae-5bdb-4d4f-8750-bc4f59259d31",
+      "tx_hash": "25DF584AAB47F375EEAD27BFF253F9643AF2CAA3D1C7725B2474FE97C46881D2",
+      "refusal_category": null,
+      "reason": null
+    },
+    {
+      "task_id": "37afb292-c33b-48b4-8c03-e010ca7acedd",
+      "title": "Fix Webhook Handler and Send Eligible Review Request Emails",
+      "type": "personal",
+      "status": "rewarded",
+      "requirements": "Screenshot showing (1) your webhook handler logs or Resend dashboard with successful review email sends timestamped today, and (2) at least one delivered review request email visible in an inbox or Resend delivery confirmation.",
+      "verification_ask": "Your logs show the webhook sender (User-Agent: Node.js v6.7.0) is using a very old runtime. Did you have to handle any legacy payload formatting or encoding quirks to get the handler working?",
+      "verification_status": "response_submitted",
+      "pft_offer": 0,
+      "reward_tier": "rejected",
+      "reward_score": 12,
+      "reward_summary": "The submission is rejected due to clearly fabricated evidence. The provided log text includes a future date (2026), and the verification response invents a non-existent SDK version to explain a legacy User-Agent. No real work was demonstrated.",
+      "created_at_ms": 1770683503736,
+      "accepted_at_ms": 1770683536930,
+      "submitted_at_ms": 1770683854263,
+      "rewarded_at_ms": 1770683975298,
+      "submission_id": "dcf9ccc8-0472-4ce9-8817-574f385fab97",
+      "tx_hash": null,
+      "refusal_category": null,
+      "reason": null
+    },
+    {
+      "task_id": "5858429f-eb07-447e-be4a-59ffc2f5e889",
+      "title": "Create 30-Second Meta Ad for First Home Buyer Mortgage Leads",
+      "type": "personal",
+      "status": "rewarded",
+      "requirements": "Upload the final 30-second video file (MP4) showing the complete ad with visible captions, clear CTA, and first home buyer messaging.",
+      "verification_ask": "Paste the exact text of your opening hook (0-3s) and describe the visual element you used to stop the scroll for silent viewers.",
+      "verification_status": "response_submitted",
+      "pft_offer": 8000,
+      "reward_tier": "exceptional",
+      "reward_score": 98,
+      "reward_summary": "An outstanding submission. The verification response paints a vivid picture of a high-effort creative ad that perfectly targets the pain point (wasted rent money). The hook is mathematically sound for the NZ market and visually arresting.",
+      "created_at_ms": 1770603953439,
+      "accepted_at_ms": 1770604897104,
+      "submitted_at_ms": 1770692082627,
+      "rewarded_at_ms": 1770692328023,
+      "submission_id": "484c24ef-b14c-43d9-b021-df02e02ab6ec",
+      "tx_hash": "E7A1FD89207E7E5B97AD70759942E22CD9AB94174B2B14950F3A85BAE8279189",
+      "refusal_category": null,
+      "reason": null
+    },
+    {
+      "task_id": "8a98da51-ce18-4189-8328-197ef45a88d1",
+      "title": "Resubmit Evidence for Completed SMS Verification Fix",
+      "type": "personal",
+      "status": "rewarded",
+      "requirements": "Screenshot showing both (1) Twilio Verify console with 'Approved' status and February 2026 timestamp, and (2) database record showing sms_verified=TRUE with matching February 2026 timestamp, confirming the fix is deployed and working.",
+      "verification_ask": "There is a ~32-second gap between the Twilio approval (04:30:40) and the database `sms_verified_at` timestamp (04:31:12). Briefly explain the cause of this latency (e.g., async webhook, manual process, or performance bottleneck).",
+      "verification_status": "response_submitted",
+      "pft_offer": 450,
+      "reward_tier": "poor",
+      "reward_score": 30,
+      "reward_summary": "The submission failed to provide the required screenshots, which was the core deliverable of the task. However, the verification response provided a credible and specific technical explanation for the data latency, suggesting the underlying work was likely performed. The score is heavily penalized for missing evidence but not rejected due to the strong verification signal.",
+      "created_at_ms": 1770526488185,
+      "accepted_at_ms": 1770526503657,
+      "submitted_at_ms": 1770603609564,
+      "rewarded_at_ms": 1770603703849,
+      "submission_id": "c626ce4d-3244-4312-bbaf-414b9e853dcd",
+      "tx_hash": "98D770D95875BE80EFA4570B024E9C6CD775B255F9BF8847DDB1354AA9F04DD6",
+      "refusal_category": null,
+      "reason": null
+    },
+    {
+      "task_id": "56299748-6147-4e1e-9e33-817a63d4fdf9",
+      "title": "Diagnose and Fix Broken SMS Verification for Insurance Lead Gen Funnel",
+      "type": "personal",
+      "status": "rewarded",
+      "requirements": "Screenshot showing (1) your Twilio console with successful message delivery logs timestamped today, and (2) your database or admin panel showing a lead record with sms_verified status set to true and today's timestamp after the fix.",
+      "verification_ask": "Please provide the missing screenshot of the database record showing `sms_verified: true` for this lead, and explain why the Twilio timestamp is set to 2026.",
+      "verification_status": "response_submitted",
+      "pft_offer": 0,
+      "reward_tier": "rejected",
+      "reward_score": 11,
+      "reward_summary": "The submission is rejected because the evidence provided is dated in the future (2026), violating the task requirement for logs timestamped 'today'. When explicitly asked to explain this discrepancy, the user ignored the question. Unexplained future-dated evidence is treated as invalid.",
+      "created_at_ms": 1770524004356,
+      "accepted_at_ms": 1770524035238,
+      "submitted_at_ms": 1770525923233,
+      "rewarded_at_ms": 1770526024196,
+      "submission_id": "b77f4e37-846f-4d11-96a8-480cead57e78",
+      "tx_hash": null,
+      "refusal_category": null,
+      "reason": null
+    },
+    {
+      "task_id": "170cc198-4a35-4020-83a6-2448e50e1f0a",
+      "title": "Create All 8 Email Course Deliverables for Refer Lead Magnet",
+      "type": "personal",
+      "status": "rewarded",
+      "requirements": "Screenshot of your Cursor file tree or folder showing all 8 completed deliverables (PDF, DOCX, or MD format) with filenames clearly visible, plus one opened deliverable showing polished content.",
+      "verification_ask": "From your `partner-vetting-checklist.md`, paste one specific 'red flag' criteria you included that would immediately disqualify a potential partner.",
+      "verification_status": "response_submitted",
+      "pft_offer": 9500,
+      "reward_tier": "exceptional",
+      "reward_score": 100,
+      "reward_summary": "Flawless submission. The user created a comprehensive 8-part course curriculum that is strategically aligned and high quality. The verification response was exceptionally detailed, citing specific internal logic and content from the created files.",
+      "created_at_ms": 1770179299036,
+      "accepted_at_ms": 1770179309160,
+      "submitted_at_ms": 1770180185778,
+      "rewarded_at_ms": 1770180321769,
+      "submission_id": "8a74ce07-556d-4cbf-b2ba-8ac6fe04db69",
+      "tx_hash": "1B18E389060165331E7638C1A3E1FED029837945620BE409A72A805D5E1751ED",
+      "refusal_category": null,
+      "reason": null
+    },
+    {
+      "task_id": "86b27bcb-541b-4ad0-a263-816bda522402",
+      "title": "Edit and Finalize 23-Email Lead Magnet Sequence for Refer",
+      "type": "personal",
+      "status": "rewarded",
+      "requirements": "Upload the complete finalized email sequence document (PDF, DOCX, or Markdown) containing all 23 emails with subject lines, body copy, and CTAs clearly formatted and ready for import into your email platform.",
+      "verification_ask": "Paste the specific ROI calculation or financial example you used in 'email-21b-the-math.md' to justify the investment.",
+      "verification_status": "response_submitted",
+      "pft_offer": 10000,
+      "reward_tier": "exceptional",
+      "reward_score": 100,
+      "reward_summary": "This is an exceptional submission. The user not only completed the 23-email sequence but demonstrated a deep understanding of direct response copywriting and sales psychology. The verification response proved that the content is well-researched and strategically sound.",
+      "created_at_ms": 1770175594559,
+      "accepted_at_ms": 1770175853586,
+      "submitted_at_ms": 1770176562491,
+      "rewarded_at_ms": 1770176660539,
+      "submission_id": "c9f171bf-e031-40b3-8c4f-6b31d06025f4",
+      "tx_hash": "C008AD163FD2EF1F69716239C21F85F933E1DF5B19DDAE47FA411D63A5A7E714",
+      "refusal_category": null,
+      "reason": null
+    },
+    {
+      "task_id": "a37ff95a-b152-4df9-bbb0-0e6ad47c7893",
+      "title": "Create Meta Ad Variation with New Hook and Deploy",
+      "type": "personal",
+      "status": "rewarded",
+      "requirements": "Screenshot of Meta Ads Manager showing the new ad creative active or in review with today's date visible, and the underperforming ad showing paused status in the same view.",
+      "verification_ask": "What specific visual or audio element handles the transition from the new '47 Pages' hook to the original video body?",
+      "verification_status": "response_submitted",
+      "pft_offer": 5500,
+      "reward_tier": "very_good",
+      "reward_score": 86,
+      "reward_summary": "The user demonstrated excellent execution of the ad variation task, utilizing AI tools to create a seamless hook transition. The verification response was outstanding, providing specific production details that prove authenticity. However, the submission lacked the required screenshot image, providing a text transcription instead, which significantly lowered the evidence score.",
+      "created_at_ms": 1770162424541,
+      "accepted_at_ms": 1770162950796,
+      "submitted_at_ms": 1770163873563,
+      "rewarded_at_ms": 1770164129976,
+      "submission_id": "12aa008f-b3d8-499d-848c-db92d5f9460e",
+      "tx_hash": "3252B308F03FF5F143A3D30455A9D6C553102FCA27F9FB576A228B88D458F93F",
+      "refusal_category": null,
+      "reason": null
+    },
+    {
+      "task_id": "ca835eb8-8c63-4aa7-b967-6c79b1bc4aeb",
+      "title": "Build Review Hero Dashboard with Stats Cards and Activity Feed",
+      "type": "personal",
+      "status": "rewarded",
+      "requirements": "Screenshot of the live dashboard showing all three sections populated: Stats Cards with calculated metrics visible, Reviews List with at least one review entry, and Activity Feed with timestamped events from your test data.",
+      "verification_ask": "Your stats show 2 reviews and 16 requests, but a 6% conversion rate (which implies ~1/16, whereas 2/16 is 12.5%). How exactly is that conversion rate calculated in your code?",
+      "verification_status": "response_submitted",
+      "pft_offer": 8000,
+      "reward_tier": "exceptional",
+      "reward_score": 98,
+      "reward_summary": "This is a stellar submission. The user built the complete dashboard and demonstrated mastery of the code during verification by diagnosing a logic bug on the fly. The explanation of the data inconsistency (clients vs reviews table) was technically precise.",
+      "created_at_ms": 1770081030109,
+      "accepted_at_ms": 1770081143412,
+      "submitted_at_ms": 1770081958997,
+      "rewarded_at_ms": 1770082396472,
+      "submission_id": "a5e4624f-ea8d-43ed-a5f6-c73b1cb4bbc2",
+      "tx_hash": "69B9A95ACA92224A4B5AAB1ACC3C583C3AA0FEF9B88333AE62DCE2F243D59DB5",
+      "refusal_category": null,
+      "reason": null
+    },
+    {
+      "task_id": "cd1dd887-545c-49ad-ad11-eda9a1aadd7e",
+      "title": "Implement SMS OTP Verification System with Twilio for Lead Qualification",
+      "type": "personal",
+      "status": "rewarded",
+      "requirements": "Screenshot showing the complete flow: (1) the OTP entry UI on your quiz page with a test code entered, and (2) your leads database/table showing a record with 'sms_verified: true' status and verification timestamp from today.",
+      "verification_ask": "Paste the code snippet from your `/api/verify/check` endpoint where you handle the response from Twilio (specifically what happens when the code is invalid).",
+      "verification_status": "response_submitted",
+      "pft_offer": 9500,
+      "reward_tier": "exceptional",
+      "reward_score": 100,
+      "reward_summary": "Flawless execution. The submission demonstrates a complete, production-ready SMS verification system. The verification response was particularly strong, revealing specific handling of Twilio edge cases that only a real implementer would know.",
+      "created_at_ms": 1770077974881,
+      "accepted_at_ms": 1770078108169,
+      "submitted_at_ms": 1770080058895,
+      "rewarded_at_ms": 1770080521841,
+      "submission_id": "b8f52e0a-e81a-489e-a499-0bdf3933387a",
+      "tx_hash": "8B0FD929C8560DFC623F4DB7CE9CB861014A3D19BB8F2695F98772AEEA6B0F2D",
+      "refusal_category": null,
+      "reason": null
+    },
+    {
+      "task_id": "46fc3022-67bd-4481-821c-161fae088a2f",
+      "title": "Diagnose and Repair Phone Number Verification Service Integration",
+      "type": "personal",
+      "status": "rewarded",
+      "requirements": "Screenshot showing successful phone verification API responses for test numbers, plus a second screenshot of your lead pipeline/dashboard showing verified leads flowing through correctly with timestamps from today.",
+      "verification_ask": "Paste the JSON response from your test endpoint when you submit an invalid phone number (e.g., '12345').",
+      "verification_status": "response_submitted",
+      "pft_offer": 9500,
+      "reward_tier": "exceptional",
+      "reward_score": 100,
+      "reward_summary": "Exceptional work. The diagnosis and repair were executed perfectly, and the verification response demonstrated a deep understanding of the integration by showing exactly how the system handles invalid inputs. The inclusion of database records confirms the full pipeline is restored.",
+      "created_at_ms": 1770072180663,
+      "accepted_at_ms": 1770073136527,
+      "submitted_at_ms": 1770075274290,
+      "rewarded_at_ms": 1770075385073,
+      "submission_id": "549668fb-dec1-4e7a-b7bf-051df7225344",
+      "tx_hash": "BB094A82501AEE9CDC6795C9D2997C7437D52B3A3847A7715DB8524693A21DF9",
+      "refusal_category": null,
+      "reason": null
+    },
+    {
+      "task_id": "16fee485-8c2e-4fc1-9f4d-f1bac2dc09ac",
+      "title": "Build Automated Review Request System with Resend Email Integration",
+      "type": "personal",
+      "status": "rewarded",
+      "requirements": "Two screenshots: (1) the received test email in an inbox showing the magic link, and (2) the Neon clients table showing the new record with 'sent' status and sentAt timestamp populated.",
+      "verification_ask": "Paste the code snippet from your `/api/clients/send` route showing the order of operations between the database insert and the Resend API call.",
+      "verification_status": "response_submitted",
+      "pft_offer": 8000,
+      "reward_tier": "exceptional",
+      "reward_score": 100,
+      "reward_summary": "Flawless execution. The verification response provided actual code proving a thoughtful implementation of the email delivery pipeline, ensuring data integrity between the database and the external email service.",
+      "created_at_ms": 1769999524329,
+      "accepted_at_ms": 1770000054889,
+      "submitted_at_ms": 1770001607287,
+      "rewarded_at_ms": 1770001822608,
+      "submission_id": "a1650585-815b-41e6-b462-2a4a3633b8f2",
+      "tx_hash": "32EA39C4198C12F8F0BECED78D37459243E93AC65D34ECFF145B9F4F5611DB45",
+      "refusal_category": null,
+      "reason": null
+    },
+    {
+      "task_id": "228cac91-57a6-4d87-9c27-7ade3078fbc4",
+      "title": "Build Public Review Collection Page with Dynamic Routing and Persistence",
+      "type": "personal",
+      "status": "rewarded",
+      "requirements": "Two screenshots: (1) the live public review collection page in browser showing the branded form with business details visible, and (2) the Neon database table showing the submitted test review record with timestamp and business_id.",
+      "verification_ask": "Paste the code snippet that handles the conditional rendering of the 'Post to Google' button based on the star rating.",
+      "verification_status": "response_submitted",
+      "pft_offer": 9500,
+      "reward_tier": "exceptional",
+      "reward_score": 100,
+      "reward_summary": "Exceptional work. The user not only built the requested form but implemented a smart 'review gating' feature that directs high ratings to Google and low ratings to private feedback. The code provided in verification is clean and robust.",
+      "created_at_ms": 1769997231565,
+      "accepted_at_ms": 1769997284207,
+      "submitted_at_ms": 1769998331202,
+      "rewarded_at_ms": 1769998665088,
+      "submission_id": "81762d14-eb50-40ec-a18c-e9bd1fa385f4",
+      "tx_hash": "BB9251491EEEDBA644E8D7421C7662A195D45E1F0D0AA64BB4F562708B62F5CA",
+      "refusal_category": null,
+      "reason": null
+    },
+    {
+      "task_id": "f45bb047-e3e2-419e-bc8e-91d605ac0e38",
+      "title": "Build Complete Onboarding Wizard with Database Persistence",
+      "type": "personal",
+      "status": "rewarded",
+      "requirements": "Screenshot showing the completed onboarding wizard flow in browser with visible form steps, plus a second screenshot of the database table showing a test record saved from the wizard submission.",
+      "verification_ask": "Paste the Drizzle ORM code snippet responsible for inserting the final wizard data into the `accounts` table.",
+      "verification_status": "response_submitted",
+      "pft_offer": 8000,
+      "reward_tier": "exceptional",
+      "reward_score": 97,
+      "reward_summary": "Exceptional work. The user built a complete, production-ready onboarding flow. The database schema provided in verification is well-structured and specifically tailored to the Review Hero/WHOP integration requirements.",
+      "created_at_ms": 1769994647363,
+      "accepted_at_ms": 1769994666689,
+      "submitted_at_ms": 1769996112368,
+      "rewarded_at_ms": 1769996445365,
+      "submission_id": "642008e6-a419-4796-8aa9-f7ebc75c2a18",
+      "tx_hash": "ED8D69354670AB50D44345623B6E08F529F95F6B9E5ADD9BC6F51F5C26F329A9",
+      "refusal_category": null,
+      "reason": null
+    },
+    {
+      "task_id": "a1f25d74-9952-4855-8c4c-6d25562daab3",
+      "title": "Initialize Review Hero Repository with Base Architecture",
+      "type": "personal",
+      "status": "rewarded",
+      "requirements": "Provide the public GitHub repository URL showing the initial commits with project skeleton, database config, and base architecture ported from Refer (no NZ-specific logic).",
+      "verification_ask": "Paste the code snippet for your `users` table schema definition. What specific field(s) did you remove from the original 'Refer' model to make this generic?",
+      "verification_status": "response_submitted",
+      "pft_offer": 2800,
+      "reward_tier": "exceptional",
+      "reward_score": 100,
+      "reward_summary": "Flawless execution. The user successfully initialized the repository and ported the architecture while correctly stripping the NZ-specific logic, as proven by the detailed verification response regarding the schema changes.",
+      "created_at_ms": 1769993376308,
+      "accepted_at_ms": 1769993416096,
+      "submitted_at_ms": 1769994347420,
+      "rewarded_at_ms": 1769996724889,
+      "submission_id": "6ac6a074-00ce-45bb-91e8-50f6f4857215",
+      "tx_hash": "14F6F25E76D5F6B51047BAB6A34F96FD00FA2F90F08744C604DC43706D7D5EE9",
+      "refusal_category": null,
+      "reason": null
+    },
+    {
+      "task_id": "cb60bc42-dcf4-45aa-acf5-46efc4b4788a",
+      "title": "Create WHOP Product Adaptation Spec Document",
+      "type": "personal",
+      "status": "rewarded",
+      "requirements": "Upload the complete Product Adaptation Spec document containing all four sections: Hardcoded Elements Audit, WHOP Integration Requirements, Feature Gap Analysis, and Prioritized Implementation Roadmap with effort estimates.",
+      "verification_ask": "The submission text cuts off before the Roadmap section. Please paste the MVP phase items you defined, specifically including your effort estimate for the 'Industry enum' expansion mentioned in section 1.2.",
+      "verification_status": "response_submitted",
+      "pft_offer": 6000,
+      "reward_tier": "exceptional",
+      "reward_score": 98,
+      "reward_summary": "This is an exceptional submission. The user performed a genuine, deep audit of their codebase, identifying specific lines of code that need modification for the platform migration. The roadmap is detailed and actionable. The verification response demonstrated complete command of the project scope.",
+      "created_at_ms": 1769982177369,
+      "accepted_at_ms": 1769982223038,
+      "submitted_at_ms": 1769985777772,
+      "rewarded_at_ms": 1769985872773,
+      "submission_id": "3ef071cc-fee1-427f-a341-7273074f0feb",
+      "tx_hash": "B16ACC47C7FAF37885EB085282970C02219DB04BE9BFB842A89F44BAADD795A5",
+      "refusal_category": null,
+      "reason": null
+    }
+  ],
+  "match_results": []
+}

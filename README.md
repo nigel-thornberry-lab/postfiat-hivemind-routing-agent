@@ -17,3 +17,22 @@ This repository is the initialization baseline for the Post Fiat Hive Mind Routi
 - Schemas: [`hivemind-routing-schemas.md`](./hivemind-routing-schemas.md)
 - Matching pseudocode: [`docs/matching-logic.md`](./docs/matching-logic.md)
 - Sample ingestion data: [`sample-data.json`](./sample-data.json)
+
+## Live API Integration
+
+The Routing Agent includes a Task Node API client and ingestion script:
+
+- `src/tasknode-client.mjs`
+- `src/fetch-live-state.mjs`
+
+### Required environment variables
+
+- `PFT_TASKNODE_JWT` (required): bearer token for Task Node API auth
+- `PFT_TASKNODE_URL` (optional): defaults to `https://tasknode.postfiat.org`
+- `PFT_TASKNODE_TIMEOUT_MS` (optional): request timeout, default `30000`
+
+### Fetch live state
+
+`PFT_TASKNODE_JWT="<jwt>" node src/fetch-live-state.mjs --operator-limit 25`
+
+This writes mapped live data to `data/live-state.json` in the same schema family as `sample-data.json`.
