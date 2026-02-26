@@ -25,6 +25,7 @@ The Routing Agent includes a Task Node API client and ingestion script:
 - `src/tasknode-client.mjs`
 - `src/fetch-live-state.mjs`
 - `src/realtime-listener.mjs`
+- `src/health-server.mjs`
 
 ### Required environment variables
 
@@ -51,3 +52,16 @@ Behavior:
 - automatically triggers the matching pipeline for incoming routable task events
 - writes latest ranked output to `data/latest-match-result.json`
 - auto-reconnects with exponential backoff and jitter on disconnect/errors
+
+### Routing health endpoint
+
+`node src/health-server.mjs`
+
+Environment:
+- `PFT_ROUTING_HEALTH_PORT` (optional): defaults to `8787`
+
+Endpoint:
+- `GET /health` returns:
+  - agent operational status (`ok`/`degraded`)
+  - uptime and environment/data-source readiness checks
+  - active schema summary for `OperatorProfile`, `NetworkTask`, and `MatchResult`
