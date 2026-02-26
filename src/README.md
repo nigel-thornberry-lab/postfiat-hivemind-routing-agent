@@ -12,6 +12,8 @@ Reserved for Hive Mind Routing Agent implementation code (scoring engine, API ad
 - `realtime-listener.mjs` - persistent WSS listener with auto-reconnect that triggers live ranking on `task_created` / `task_updated`
 - `health-server.mjs` - lightweight HTTP health endpoint exposing operational status + schema summary
 - `schema-summary.mjs` - canonical field lists for OperatorProfile/NetworkTask/MatchResult health reporting
+- `state-ingestion.mjs` - strict parser/transformer/validator mapping raw API/WSS payloads into `OperatorProfile` + `NetworkTask`
+- `test-state-ingestion.mjs` - live ingestion verification script against Task Node payloads
 
 Run:
 
@@ -22,3 +24,5 @@ Run:
 `PFT_TASKNODE_JWT="<jwt>" PFT_TASKNODE_WSS_URL="wss://..." node src/realtime-listener.mjs`
 
 `node src/health-server.mjs`
+
+`PFT_TASKNODE_JWT="<jwt>" node src/test-state-ingestion.mjs`

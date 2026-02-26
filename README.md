@@ -26,6 +26,7 @@ The Routing Agent includes a Task Node API client and ingestion script:
 - `src/fetch-live-state.mjs`
 - `src/realtime-listener.mjs`
 - `src/health-server.mjs`
+- `src/state-ingestion.mjs`
 
 ### Required environment variables
 
@@ -41,6 +42,18 @@ The Routing Agent includes a Task Node API client and ingestion script:
 `PFT_TASKNODE_JWT="<jwt>" node src/fetch-live-state.mjs --operator-limit 25`
 
 This writes mapped live data to `data/live-state.json` in the same schema family as `sample-data.json`.
+
+### State ingestion module (API + WSS payload mapping)
+
+`src/state-ingestion.mjs` performs strict parsing + transformation + validation:
+
+- raw API/WSS operator payloads -> `OperatorProfile`
+- raw API/WSS task payloads -> `NetworkTask`
+- strict schema conformance checks before handoff to matching engine
+
+Run live ingestion test:
+
+`PFT_TASKNODE_JWT="<jwt>" node src/test-state-ingestion.mjs`
 
 ### Real-time task event listener
 
