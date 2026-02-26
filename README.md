@@ -29,6 +29,7 @@ The Routing Agent includes a Task Node API client and ingestion script:
 - `src/state-ingestion.mjs`
 - `src/dispatch-routing.mjs`
 - `src/e2e-dry-run.mjs`
+- `src/agent-daemon.mjs`
 
 ### Required environment variables
 
@@ -41,6 +42,8 @@ The Routing Agent includes a Task Node API client and ingestion script:
 - `PFT_TASKNODE_WSS_TOPICS` (optional): comma-separated event topics; default `task_created,task_updated`
 - `PFT_ROUTING_EVENT_OUTPUT` (optional): output path for latest ranked event result; default `data/latest-match-result.json`
 - `PFT_E2E_DRY_RUN_LOG` (optional): output path for e2e dry-run log; default `data/e2e-dry-run-log.json`
+- `PFT_EVENT_PROCESS_MAX_ATTEMPTS` (optional): retries for rate-limited event processing, default `3`
+- `PFT_DISPATCH_MAX_ATTEMPTS` (optional): retries for retryable dispatch failures, default `3`
 
 ### Fetch live state
 
@@ -89,6 +92,17 @@ Behavior:
 - automatically triggers the matching pipeline for incoming routable task events
 - writes latest ranked output to `data/latest-match-result.json`
 - auto-reconnects with exponential backoff and jitter on disconnect/errors
+- retries event processing on API rate-limit errors with exponential backoff
+
+### 24/7 daemon mode
+
+`PFT_TASKNODE_JWT="<jwt>" PFT_TASKNODE_WSS_URL="wss://<tasknode-endpoint>" node src/agent-daemon.mjs`
+
+Daemon behavior:
+- starts the real-time listener process
+- restarts listener automatically on crash/exit with exponential backoff
+- installs global handlers for uncaught exceptions and unhandled promise rejections
+- keeps credentials in environment variables only (no hardcoded secrets)
 
 ### Routing health endpoint
 
@@ -102,3 +116,21 @@ Endpoint:
   - agent operational status (`ok`/`degraded`)
   - uptime and environment/data-source readiness checks
   - active schema summary for `OperatorProfile`, `NetworkTask`, and `MatchResult`
+
+## Deployment (systemd)
+
+Reference files:
+- `deploy/hivemind-routing-agent.service`
+- `deploy/hivemind-routing-agent.env.example`
+
+Suggested setup:
+1. Clone repo to `/opt/postfiat-hivemind-routing-agent`
+2. Copy env template to `/etc/postfiat/hivemind-routing-agent.env`
+3. Set file permissions to `600` and owner to service user
+4. Install the service:
+   - `sudo cp deploy/hivemind-routing-agent.service /etc/systemd/system/`
+   - `sudo systemctl daemon-reload`
+   - `sudo systemctl enable --now hivemind-routing-agent`
+5. Monitor:
+   - `sudo systemctl status hivemind-routing-agent`
+   - `sudo journalctl -u hivemind-routing-agent -f`

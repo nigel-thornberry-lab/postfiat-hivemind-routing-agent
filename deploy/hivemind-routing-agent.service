@@ -1,0 +1,24 @@
+[Unit]
+Description=Hive Mind Routing Agent Daemon
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/postfiat-hivemind-routing-agent
+ExecStart=/usr/bin/node /opt/postfiat-hivemind-routing-agent/src/agent-daemon.mjs
+Restart=always
+RestartSec=5
+EnvironmentFile=/etc/postfiat/hivemind-routing-agent.env
+StandardOutput=append:/var/log/hivemind-routing-agent.log
+StandardError=append:/var/log/hivemind-routing-agent.err.log
+User=postfiat
+Group=postfiat
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+ReadWritePaths=/opt/postfiat-hivemind-routing-agent/data /var/log
+
+[Install]
+WantedBy=multi-user.target

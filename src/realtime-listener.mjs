@@ -3,7 +3,9 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createTaskNodeClientFromEnv } from "./tasknode-client.mjs";
+import { createDispatchRouterFromEnv, DispatchError } from "./dispatch-routing.mjs";
 import { rankOperatorsForTask } from "./matcher.mjs";
+import { ingestNetworkTasks } from "./state-ingestion.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -66,9 +68,14 @@ function normalizeEventTask(rawTask) {
 async function buildTaskForRouting(client, rawTask, statusHint = null) {
   const normalized = normalizeEventTask(rawTask);
   if (normalized) {
-    const mapped = client.mapRawTask(normalized, statusHint);
-    if (mapped.task_id && mapped.title && mapped.requirements) {
-      return mapped;
+    try {
+      const tasks = ingestNetworkTasks({ task: normalized }, { statusHint });
+      const mapped = tasks[0];
+      if (mapped?.task_id && mapped?.title && mapped?.requirements) {
+        return mapped;
+      }
+    } catch {
+      // fall through to task lookup fallback
     }
   }
 
@@ -112,23 +119,105 @@ async function processTaskEvent(client, payload, outputPath) {
   };
 
   const ranking = rankOperatorsForTask(dataset, task);
+  const top = ranking.ranked_results[0];
+
+  let dispatch = null;
+  if (top) {
+    dispatch = await dispatchTopMatch(top);
+  }
+
   const output = {
     event_type: eventType,
     received_at: new Date().toISOString(),
     task_id: task.task_id,
     ranking,
+    dispatch,
   };
   writeOutput(outputPath, output);
 
-  const top = ranking.ranked_results[0];
   if (top) {
     console.log(
-      `[listener] ${eventType} -> ranked ${ranking.ranked_results.length} operators for task ${task.task_id}. top=${top.operator.operator_id} score=${top.scores.overall_match_score}`
+      `[listener] ${eventType} -> ranked ${ranking.ranked_results.length} operators for task ${task.task_id}. top=${top.operator.operator_id} score=${top.scores.overall_match_score} dispatch=${dispatch?.ok ? "ok" : "error"}`
     );
   } else {
     console.log(
       `[listener] ${eventType} -> no eligible operators after filtering for task ${task.task_id}.`
     );
+  }
+}
+
+const dispatchRouter = createDispatchRouterFromEnv();
+
+function isRateLimitError(error) {
+  if (!error) return false;
+  const message = String(error.message || "").toLowerCase();
+  return message.includes("429") || message.includes("rate limit");
+}
+
+async function dispatchTopMatch(matchResult) {
+  const maxAttempts = Number(process.env.PFT_DISPATCH_MAX_ATTEMPTS || 3);
+  let attempt = 0;
+  while (attempt < maxAttempts) {
+    attempt += 1;
+    try {
+      const result = await dispatchRouter.dispatchMatch(matchResult, {
+        assignmentSource: "hivemind-realtime-listener",
+      });
+      return {
+        ok: true,
+        attempt,
+        dry_run: Boolean(result?.dry_run),
+        status: result?.status ?? null,
+        response: result?.response ?? null,
+      };
+    } catch (error) {
+      const retryable = error instanceof DispatchError ? error.retryable : false;
+      const code = error instanceof DispatchError ? error.code : "UNKNOWN";
+      console.error(
+        `[listener] Dispatch failed attempt=${attempt} code=${code} retryable=${retryable}: ${error.message}`
+      );
+      if (!retryable || attempt >= maxAttempts) {
+        return {
+          ok: false,
+          attempt,
+          dry_run: false,
+          status: error.status ?? null,
+          error_code: code,
+          error_message: error.message,
+        };
+      }
+      const backoffMs = Math.min(20000, 1000 * 2 ** (attempt - 1));
+      const jitterMs = Math.floor(Math.random() * 200);
+      await sleep(backoffMs + jitterMs);
+    }
+  }
+  return {
+    ok: false,
+    error_code: "DISPATCH_RETRY_EXHAUSTED",
+    error_message: "Dispatch retries exhausted.",
+  };
+}
+
+async function processTaskEventWithRetry(client, payload, outputPath) {
+  const maxAttempts = Number(process.env.PFT_EVENT_PROCESS_MAX_ATTEMPTS || 3);
+  let attempt = 0;
+  while (attempt < maxAttempts) {
+    attempt += 1;
+    try {
+      await processTaskEvent(client, payload, outputPath);
+      return;
+    } catch (error) {
+      const rateLimited = isRateLimitError(error);
+      console.error(
+        `[listener] Event processing failed attempt=${attempt} rate_limited=${rateLimited}: ${error.message}`
+      );
+      if (!rateLimited || attempt >= maxAttempts) {
+        throw error;
+      }
+      const backoffMs = Math.min(15000, 1000 * 2 ** (attempt - 1));
+      const jitterMs = Math.floor(Math.random() * 200);
+      await sleep(backoffMs + jitterMs);
+    }
   }
 }
 
@@ -210,7 +299,7 @@ async function main() {
           if (!topics.includes(eventType)) return;
 
           try {
-            await processTaskEvent(client, payload, outputPath);
+            await processTaskEventWithRetry(client, payload, outputPath);
           } catch (error) {
             console.error(`[listener] Failed to process ${eventType}: ${error.message}`);
           }
