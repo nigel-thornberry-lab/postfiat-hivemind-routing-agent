@@ -1,6 +1,41 @@
 # Hive Mind Routing Agent
 
-This repository is the initialization baseline for the Post Fiat Hive Mind Routing Agent. It centralizes live network audit outputs, typed schemas, a sample dataset, and the core matching algorithm specification.
+This repository is the routing and policy layer for the Post Fiat Hive Mind system.
+It centralizes live network audit outputs, typed schemas, matching logic, integrity controls, and observability.
+
+## Purpose and Scope
+
+This project is designed to answer:
+
+- "Given a task request, who are the best operators to route it to?"
+- "What integrity and risk controls should gate or penalize routing?"
+- "How can routing decisions be audited in a verifiable way?"
+
+This project is **not** intended to replace the generic task execution loop client.
+
+## What This Repo Is / Is Not
+
+**This repo is:**
+- a ranking engine (`OperatorProfile` x `NetworkTask` -> ranked `MatchResult[]`)
+- an integrity-aware policy layer (sybil penalties + hard-block filters)
+- a real-time listener + orchestration shell for routing decisions
+- an observability/audit telemetry module for routing evidence
+
+**This repo is not:**
+- the canonical "worker loop" implementation for request/accept/evidence/verification/reward
+- a wallet management product
+- the source of truth for all Task Node lifecycle semantics
+
+## Relationship to Task Loop Clients
+
+The router is intentionally compatible with external task-loop clients.
+Integration model:
+
+1. A worker or coordinator emits/receives live task state.
+2. This routing layer ranks candidate operators for that task.
+3. A downstream execution client performs assignment acceptance/evidence/verification flows.
+
+If an existing task-loop client already handles end-to-end execution, this repository should be used as a plug-in routing policy engine rather than a replacement.
 
 ## Repository Structure
 
@@ -31,6 +66,7 @@ The Routing Agent includes a Task Node API client and ingestion script:
 - `src/e2e-dry-run.mjs`
 - `src/agent-daemon.mjs`
 - `src/integrity-integration.mjs`
+- `src/feedback-ingestion.mjs`
 
 ### Required environment variables
 
@@ -46,6 +82,8 @@ The Routing Agent includes a Task Node API client and ingestion script:
 - `PFT_EVENT_PROCESS_MAX_ATTEMPTS` (optional): retries for rate-limited event processing, default `3`
 - `PFT_DISPATCH_MAX_ATTEMPTS` (optional): retries for retryable dispatch failures, default `3`
 - `PFT_TASKNODE_INTEGRITY_PATH` (optional): integrity endpoint path, default `/api/routing/integrity`
+- `PFT_FEEDBACK_MEMORY_PATH` (optional): feedback memory store path used by ingestion + matcher
+- `PFT_FEEDBACK_OPERATOR_ID` (optional): explicit operator ID to attribute terminal outcomes to
 - `PFT_INTEGRITY_BLOCKED_OPERATOR_IDS` (optional): comma-separated hard-block operator IDs
 - `PFT_INTEGRITY_BLOCKED_WALLETS` (optional): comma-separated hard-block wallet addresses
 - `PFT_INTEGRITY_UNAUTHORIZED_OPERATOR_IDS` (optional): comma-separated unauthorized operator IDs
@@ -89,6 +127,21 @@ Run unit tests:
 Run integrity tests:
 
 `node --test src/test-integrity-integration.mjs`
+
+### Feedback ingestion and dynamic weighting module
+
+`src/feedback-ingestion.mjs` provides:
+- terminal outcome ingestion from live task state (`completed`, `refused`, `abandoned`)
+- persistent feedback memory per operator (`performance_multiplier`, `alignment_bonus`)
+- idempotent processing via `processed_outcome_ids`
+- dynamic weighting inputs consumed by `matcher.mjs` in future routing cycles
+
+Run ingestion:
+
+`PFT_TASKNODE_JWT="<jwt>" PFT_FEEDBACK_OPERATOR_ID="<operator-id>" node src/feedback-ingestion.mjs`
+
+Schema:
+- `docs/feedback-outcome-schema.md`
 
 ### End-to-end dry-run integration
 

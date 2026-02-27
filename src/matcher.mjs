@@ -5,6 +5,7 @@ import { randomUUID } from "node:crypto";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { getSybilPenaltyMultiplier } from "./integrity-integration.mjs";
 import { createTelemetryEmitterFromEnv } from "./telemetry.mjs";
+import { loadFeedbackMemory } from "./feedback-ingestion.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -80,6 +81,29 @@ function buildIntegrityIndexes(dataset) {
   };
 }
 
+function resolveFeedbackMemory(dataset) {
+  if (dataset?.feedback_memory) return dataset.feedback_memory;
+  const memoryPath = process.env.PFT_FEEDBACK_MEMORY_PATH;
+  if (!memoryPath) return null;
+  try {
+    return loadFeedbackMemory(memoryPath);
+  } catch {
+    return null;
+  }
+}
+
+function getFeedbackWeights(memory, operatorId) {
+  if (!memory || !operatorId) {
+    return { performance_multiplier: 1.0, alignment_bonus: 0 };
+  }
+  const entry = memory.operators?.[operatorId];
+  if (!entry) return { performance_multiplier: 1.0, alignment_bonus: 0 };
+  return {
+    performance_multiplier: Number(entry.performance_multiplier) || 1.0,
+    alignment_bonus: Number(entry.alignment_bonus) || 0,
+  };
+}
+
 function averageConfidence(expertEntries) {
   const weights = { high: 1.0, medium: 0.75, low: 0.5 };
   const values = expertEntries
@@ -105,6 +129,7 @@ export function findTask(dataset, { taskId, taskTitle }) {
 export function rankOperatorsForTask(dataset, task) {
   const telemetry = dataset?.telemetry || createTelemetryEmitterFromEnv();
   const runId = dataset?.metadata?.generated_at || new Date().toISOString();
+  const feedbackMemory = resolveFeedbackMemory(dataset);
   const sourceText = `${task.title} ${task.requirements}`;
   const taskTokens = new Set(tokenize(sourceText));
   const taskTokenCount = Math.max(taskTokens.size, 1);
@@ -178,7 +203,10 @@ export function rankOperatorsForTask(dataset, task) {
     );
     const expertiseScore = clamp01((matchedTokens.length / taskTokenCount) * confidenceMultiplier);
 
-    const alignmentScoreNorm = clamp01((operator.alignment_score || 0) / 100);
+    const feedbackWeights = getFeedbackWeights(feedbackMemory, operator.operator_id);
+    const adjustedAlignmentScore =
+      Number(operator.alignment_score || 0) + feedbackWeights.alignment_bonus;
+    const alignmentScoreNorm = clamp01(adjustedAlignmentScore / 100);
     const sybilScoreNorm = clamp01((operator.sybil_score || 0) / 100);
     const sybilPenaltyMultiplier = getSybilPenaltyMultiplier(
       operator.sybil_risk,
@@ -206,7 +234,11 @@ export function rankOperatorsForTask(dataset, task) {
       SCORING_WEIGHTS.sybil * sybilScoreNorm;
     const normalizationDivisor =
       SCORING_WEIGHTS.expertise + SCORING_WEIGHTS.alignment + SCORING_WEIGHTS.sybil;
-    const overallMatchScore = clamp01((rawWeighted / normalizationDivisor) * sybilPenaltyMultiplier);
+    const overallMatchScore = clamp01(
+      (rawWeighted / normalizationDivisor) *
+        sybilPenaltyMultiplier *
+        feedbackWeights.performance_multiplier
+    );
     const confidence = clamp01(overallMatchScore + (matchedDomains.length >= 2 ? 0.03 : 0));
 
     active.push({
@@ -221,6 +253,7 @@ export function rankOperatorsForTask(dataset, task) {
         operator_id: operator.operator_id,
         wallet_address: operator.wallet_address,
         alignment_score: operator.alignment_score,
+        alignment_score_adjusted: Number(adjustedAlignmentScore.toFixed(2)),
         sybil_score: operator.sybil_score,
       },
       scores: {
@@ -229,6 +262,9 @@ export function rankOperatorsForTask(dataset, task) {
         alignment_score_norm: Number(alignmentScoreNorm.toFixed(4)),
         sybil_score_norm: Number(sybilScoreNorm.toFixed(4)),
         sybil_penalty_multiplier: Number(sybilPenaltyMultiplier.toFixed(4)),
+        feedback_performance_multiplier: Number(
+          feedbackWeights.performance_multiplier.toFixed(4)
+        ),
       },
       confidence: Number(confidence.toFixed(4)),
       routing_decision: overallMatchScore >= 0.75 ? "assign" : "defer",
@@ -242,14 +278,29 @@ export function rankOperatorsForTask(dataset, task) {
         alignment_tier: operator.alignment_tier,
         sybil_risk: operator.sybil_risk,
         integrity_blocked: false,
+        feedback_alignment_bonus: Number(feedbackWeights.alignment_bonus.toFixed(2)),
       },
       explanation: [
         `Matched expert tags: ${matchedDomains.join(", ")}`,
         `Final score combines expertise overlap with alignment and sybil weighting (sybil penalty x${Number(
           sybilPenaltyMultiplier.toFixed(2)
-        )}).`,
+        )}, feedback multiplier x${Number(feedbackWeights.performance_multiplier.toFixed(2))}).`,
       ],
     });
+
+    if (feedbackWeights.performance_multiplier !== 1 || feedbackWeights.alignment_bonus !== 0) {
+      telemetry?.emit({
+        event_type: "routing.feedback_weight_applied",
+        severity: "info",
+        run_id: runId,
+        task_id: task.task_id,
+        operator_id: operator.operator_id,
+        payload: {
+          feedback_performance_multiplier: feedbackWeights.performance_multiplier,
+          feedback_alignment_bonus: feedbackWeights.alignment_bonus,
+        },
+      });
+    }
 
     telemetry?.emit({
       event_type: "routing.match_scored",
@@ -263,6 +314,10 @@ export function rankOperatorsForTask(dataset, task) {
         alignment_score_norm: Number(alignmentScoreNorm.toFixed(4)),
         sybil_score_norm: Number(sybilScoreNorm.toFixed(4)),
         sybil_penalty_multiplier: Number(sybilPenaltyMultiplier.toFixed(4)),
+        feedback_performance_multiplier: Number(
+          feedbackWeights.performance_multiplier.toFixed(4)
+        ),
+        feedback_alignment_bonus: Number(feedbackWeights.alignment_bonus.toFixed(2)),
       },
     });
   }

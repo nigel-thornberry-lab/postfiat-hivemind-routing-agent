@@ -8,6 +8,7 @@ import { fetchLiveIntegrityContext } from "./integrity-integration.mjs";
 import { rankOperatorsForTask } from "./matcher.mjs";
 import { ingestNetworkTasks } from "./state-ingestion.mjs";
 import { createTelemetryEmitterFromEnv } from "./telemetry.mjs";
+import { ingestLiveFeedbackOutcomes } from "./feedback-ingestion.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -97,6 +98,18 @@ function writeOutput(filePath, payload) {
 async function processTaskEvent(client, payload, outputPath) {
   const telemetry = createTelemetryEmitterFromEnv();
   const runId = new Date().toISOString();
+  const feedbackMemoryPath = process.env.PFT_FEEDBACK_MEMORY_PATH || null;
+  if (feedbackMemoryPath) {
+    try {
+      await ingestLiveFeedbackOutcomes({
+        memoryPath: feedbackMemoryPath,
+        operatorId: process.env.PFT_FEEDBACK_OPERATOR_ID || null,
+        telemetry,
+      });
+    } catch (error) {
+      console.error(`[listener] Feedback ingestion failed: ${error.message}`);
+    }
+  }
   const eventType = getEventType(payload) || "task_event";
   const statusHint =
     eventType === "task_created" ? "pending" : eventType === "task_updated" ? null : null;
