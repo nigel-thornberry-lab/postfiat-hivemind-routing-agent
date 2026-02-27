@@ -22,6 +22,8 @@ Reserved for Hive Mind Routing Agent implementation code (scoring engine, API ad
 - `test-integrity-integration.mjs` - tests for integrity filtering and sybil-penalty behavior
 - `telemetry.mjs` - structured audit telemetry emitter for match, penalty, and block decisions (stdout/file/webhook transports)
 - `feedback-ingestion.mjs` - terminal outcome ingestion + dynamic operator weight memory updates
+- `on-demand-query.mjs` - user request -> ranked operator matches using live state and weighting profiles
+- `query-server.mjs` - lightweight HTTP endpoint for on-demand `POST /query`
 
 Run:
 
@@ -48,3 +50,7 @@ Run:
 `PFT_TASKNODE_JWT="<jwt>" PFT_FEEDBACK_OPERATOR_ID="<operator-id>" PFT_FEEDBACK_MEMORY_PATH="data/feedback-memory.json" node src/feedback-ingestion.mjs`
 
 `node --test src/test-feedback-ingestion.mjs`
+
+`node --test src/test-on-demand-query.mjs`
+
+`PFT_TASKNODE_JWT="<jwt>" node src/query-server.mjs`

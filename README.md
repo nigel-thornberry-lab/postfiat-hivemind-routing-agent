@@ -67,6 +67,8 @@ The Routing Agent includes a Task Node API client and ingestion script:
 - `src/agent-daemon.mjs`
 - `src/integrity-integration.mjs`
 - `src/feedback-ingestion.mjs`
+- `src/on-demand-query.mjs`
+- `src/query-server.mjs`
 
 ### Required environment variables
 
@@ -84,6 +86,7 @@ The Routing Agent includes a Task Node API client and ingestion script:
 - `PFT_TASKNODE_INTEGRITY_PATH` (optional): integrity endpoint path, default `/api/routing/integrity`
 - `PFT_FEEDBACK_MEMORY_PATH` (optional): feedback memory store path used by ingestion + matcher
 - `PFT_FEEDBACK_OPERATOR_ID` (optional): explicit operator ID to attribute terminal outcomes to
+- `PFT_QUERY_PORT` (optional): on-demand query server port, default `8790`
 - `PFT_INTEGRITY_BLOCKED_OPERATOR_IDS` (optional): comma-separated hard-block operator IDs
 - `PFT_INTEGRITY_BLOCKED_WALLETS` (optional): comma-separated hard-block wallet addresses
 - `PFT_INTEGRITY_UNAUTHORIZED_OPERATOR_IDS` (optional): comma-separated unauthorized operator IDs
@@ -142,6 +145,22 @@ Run ingestion:
 
 Schema:
 - `docs/feedback-outcome-schema.md`
+
+### On-demand user-to-agent query flow
+
+Use this when a user explicitly asks for best operator matches (no unsolicited dispatch spam).
+
+- Query evaluator module: `src/on-demand-query.mjs`
+- HTTP endpoint server: `src/query-server.mjs` (`POST /query`)
+- Query schema: `docs/on-demand-query-schema.md`
+
+Run query server:
+
+`PFT_TASKNODE_JWT="<jwt>" node src/query-server.mjs`
+
+Example request:
+
+`curl -X POST "http://localhost:8790/query" -H "Content-Type: application/json" --data '{"user_request_text":"Need help with video production","required_skills":["video production","creative scripting"],"constraints":{"max_sybil_risk":"Moderate","min_alignment_score":60,"public_only":true},"top_k":3}'`
 
 ### End-to-end dry-run integration
 
