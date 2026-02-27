@@ -20,6 +20,7 @@ Reserved for Hive Mind Routing Agent implementation code (scoring engine, API ad
 - `agent-daemon.mjs` - production supervisor loop that runs listener continuously with crash recovery and restart backoff
 - `integrity-integration.mjs` - live sybil/circuit-breaker integrity context and policy utilities
 - `test-integrity-integration.mjs` - tests for integrity filtering and sybil-penalty behavior
+- `telemetry.mjs` - structured audit telemetry emitter for match, penalty, and block decisions (stdout/file/webhook transports)
 
 Run:
 
@@ -40,3 +41,5 @@ Run:
 `PFT_TASKNODE_JWT="<jwt>" PFT_TASKNODE_WSS_URL="wss://..." node src/agent-daemon.mjs`
 
 `node --test src/test-integrity-integration.mjs`
+
+`PFT_TELEMETRY_ENABLED="true" PFT_TELEMETRY_TRANSPORT="stdout,file" PFT_TELEMETRY_FILE="data/routing-telemetry.log" node src/matcher.mjs`

@@ -4,6 +4,7 @@ import path from "node:path";
 import { randomUUID } from "node:crypto";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { getSybilPenaltyMultiplier } from "./integrity-integration.mjs";
+import { createTelemetryEmitterFromEnv } from "./telemetry.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -102,6 +103,8 @@ export function findTask(dataset, { taskId, taskTitle }) {
 }
 
 export function rankOperatorsForTask(dataset, task) {
+  const telemetry = dataset?.telemetry || createTelemetryEmitterFromEnv();
+  const runId = dataset?.metadata?.generated_at || new Date().toISOString();
   const sourceText = `${task.title} ${task.requirements}`;
   const taskTokens = new Set(tokenize(sourceText));
   const taskTokenCount = Math.max(taskTokens.size, 1);
@@ -117,6 +120,17 @@ export function rankOperatorsForTask(dataset, task) {
       integrity.unauthorizedOperatorIds.has(operator.operator_id);
 
     if (isHardBlocked) {
+      telemetry?.emit({
+        event_type: "routing.operator_blocked",
+        severity: "warn",
+        run_id: runId,
+        task_id: task.task_id,
+        operator_id: operator.operator_id,
+        payload: {
+          wallet_address: operator.wallet_address,
+          reason: "integrity_policy",
+        },
+      });
       rejected.push({
         operator_id: operator.operator_id,
         wallet_address: operator.wallet_address,
@@ -140,6 +154,17 @@ export function rankOperatorsForTask(dataset, task) {
 
     // Hard filter: only keep operators with at least one expert-tag match.
     if (matchedDomains.length === 0) {
+      telemetry?.emit({
+        event_type: "routing.operator_rejected",
+        severity: "info",
+        run_id: runId,
+        task_id: task.task_id,
+        operator_id: operator.operator_id,
+        payload: {
+          wallet_address: operator.wallet_address,
+          reason: "no_expert_tag_overlap",
+        },
+      });
       rejected.push({
         operator_id: operator.operator_id,
         wallet_address: operator.wallet_address,
@@ -159,6 +184,20 @@ export function rankOperatorsForTask(dataset, task) {
       operator.sybil_risk,
       operator.sybil_score
     );
+    if (sybilPenaltyMultiplier < 1) {
+      telemetry?.emit({
+        event_type: "routing.sybil_penalty_applied",
+        severity: "warn",
+        run_id: runId,
+        task_id: task.task_id,
+        operator_id: operator.operator_id,
+        payload: {
+          sybil_risk: operator.sybil_risk,
+          sybil_score: operator.sybil_score,
+          penalty_multiplier: sybilPenaltyMultiplier,
+        },
+      });
+    }
 
     // Normalize weighted sum since this executable uses only these three components.
     const rawWeighted =
@@ -211,11 +250,39 @@ export function rankOperatorsForTask(dataset, task) {
         )}).`,
       ],
     });
+
+    telemetry?.emit({
+      event_type: "routing.match_scored",
+      severity: "info",
+      run_id: runId,
+      task_id: task.task_id,
+      operator_id: operator.operator_id,
+      payload: {
+        overall_match_score: Number(overallMatchScore.toFixed(4)),
+        expertise_score: Number(expertiseScore.toFixed(4)),
+        alignment_score_norm: Number(alignmentScoreNorm.toFixed(4)),
+        sybil_score_norm: Number(sybilScoreNorm.toFixed(4)),
+        sybil_penalty_multiplier: Number(sybilPenaltyMultiplier.toFixed(4)),
+      },
+    });
   }
 
   active.sort((a, b) => b.scores.overall_match_score - a.scores.overall_match_score);
   active.forEach((item, index) => {
     item.rank = index + 1;
+  });
+
+  telemetry?.emit({
+    event_type: "routing.rank_complete",
+    severity: "info",
+    run_id: runId,
+    task_id: task.task_id,
+    payload: {
+      ranked_count: active.length,
+      rejected_count: rejected.length,
+      top_operator_id: active[0]?.operator?.operator_id || null,
+      top_score: active[0]?.scores?.overall_match_score || null,
+    },
   });
 
   return {

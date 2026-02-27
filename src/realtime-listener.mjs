@@ -7,6 +7,7 @@ import { createDispatchRouterFromEnv, DispatchError } from "./dispatch-routing.m
 import { fetchLiveIntegrityContext } from "./integrity-integration.mjs";
 import { rankOperatorsForTask } from "./matcher.mjs";
 import { ingestNetworkTasks } from "./state-ingestion.mjs";
+import { createTelemetryEmitterFromEnv } from "./telemetry.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -94,6 +95,8 @@ function writeOutput(filePath, payload) {
 }
 
 async function processTaskEvent(client, payload, outputPath) {
+  const telemetry = createTelemetryEmitterFromEnv();
+  const runId = new Date().toISOString();
   const eventType = getEventType(payload) || "task_event";
   const statusHint =
     eventType === "task_created" ? "pending" : eventType === "task_updated" ? null : null;
@@ -105,7 +108,7 @@ async function processTaskEvent(client, payload, outputPath) {
   }
 
   const operatorProfiles = await client.fetchOperatorProfiles({ limit: 50 });
-  const integrity = await fetchLiveIntegrityContext(client, operatorProfiles);
+  const integrity = await fetchLiveIntegrityContext(client, operatorProfiles, { telemetry, runId });
   const dataset = {
     metadata: {
       dataset: "realtime-event-snapshot",
@@ -119,6 +122,7 @@ async function processTaskEvent(client, payload, outputPath) {
     network_tasks: [task],
     match_results: [],
     integrity,
+    telemetry,
   };
 
   const ranking = rankOperatorsForTask(dataset, task);

@@ -39,6 +39,8 @@ export function buildIntegrityContext({
   operatorProfiles = [],
   rawIntegrityPayload = null,
   env = process.env,
+  telemetry = null,
+  runId = null,
 } = {}) {
   const payload = rawIntegrityPayload || {};
   const circuit = payload.circuit_breaker || payload.circuitBreaker || {};
@@ -79,7 +81,7 @@ export function buildIntegrityContext({
     ),
   }));
 
-  return {
+  const context = {
     source: payload ? "live+env" : "env",
     fetched_at: new Date().toISOString(),
     circuit_breaker: {
@@ -92,14 +94,35 @@ export function buildIntegrityContext({
     unauthorized_operator_ids: [...unauthorizedOperatorIds],
     sybil_snapshot: sybilSnapshot,
   };
+
+  telemetry?.emit({
+    event_type: "integrity.context_built",
+    severity: "info",
+    run_id: runId,
+    payload: {
+      source: context.source,
+      circuit_breaker_open: context.circuit_breaker.open,
+      blocked_operator_count: context.circuit_breaker.blocked_operator_ids.length,
+      blocked_wallet_count: context.circuit_breaker.blocked_wallet_addresses.length,
+      unauthorized_operator_count: context.unauthorized_operator_ids.length,
+      sybil_snapshot_count: context.sybil_snapshot.length,
+    },
+  });
+
+  return context;
 }
 
-export async function fetchLiveIntegrityContext(client, operatorProfiles = []) {
+export async function fetchLiveIntegrityContext(client, operatorProfiles = [], options = {}) {
   let payload = null;
   try {
     payload = await client.getRoutingIntegrityStatus();
   } catch {
     payload = null;
   }
-  return buildIntegrityContext({ operatorProfiles, rawIntegrityPayload: payload });
+  return buildIntegrityContext({
+    operatorProfiles,
+    rawIntegrityPayload: payload,
+    telemetry: options.telemetry || null,
+    runId: options.runId || null,
+  });
 }
