@@ -24,6 +24,7 @@ Reserved for Hive Mind Routing Agent implementation code (scoring engine, API ad
 - `feedback-ingestion.mjs` - terminal outcome ingestion + dynamic operator weight memory updates
 - `on-demand-query.mjs` - user request -> ranked operator matches using live state and weighting profiles
 - `query-server.mjs` - lightweight HTTP endpoint for on-demand `POST /query`
+- `double-opt-in.mjs` - event-sourced proposal handshake with dual signatures and replay protection
 
 Run:
 
@@ -54,3 +55,5 @@ Run:
 `node --test src/test-on-demand-query.mjs`
 
 `PFT_TASKNODE_JWT="<jwt>" node src/query-server.mjs`
+
+`node --test src/test-double-opt-in.mjs`

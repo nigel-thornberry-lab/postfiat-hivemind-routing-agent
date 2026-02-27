@@ -69,6 +69,7 @@ The Routing Agent includes a Task Node API client and ingestion script:
 - `src/feedback-ingestion.mjs`
 - `src/on-demand-query.mjs`
 - `src/query-server.mjs`
+- `src/double-opt-in.mjs`
 
 ### Required environment variables
 
@@ -161,6 +162,16 @@ Run query server:
 Example request:
 
 `curl -X POST "http://localhost:8790/query" -H "Content-Type: application/json" --data '{"user_request_text":"Need help with video production","required_skills":["video production","creative scripting"],"constraints":{"max_sybil_risk":"Moderate","min_alignment_score":60,"public_only":true},"top_k":3}'`
+
+### Double Opt-In handshake protocol (event-sourced)
+
+- Protocol module: `src/double-opt-in.mjs`
+- Schema doc: `docs/double-opt-in-schema.md`
+- Unit tests: `src/test-double-opt-in.mjs`
+
+Run tests:
+
+`node --test src/test-double-opt-in.mjs`
 
 ### End-to-end dry-run integration
 
