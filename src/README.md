@@ -25,6 +25,8 @@ Reserved for Hive Mind Routing Agent implementation code (scoring engine, API ad
 - `on-demand-query.mjs` - user request -> ranked operator matches using live state and weighting profiles
 - `query-server.mjs` - lightweight HTTP endpoint for on-demand `POST /query`
 - `double-opt-in.mjs` - event-sourced proposal handshake with dual signatures and replay protection
+- `proposal-service.mjs` - durable proposal orchestration linking query results to handshake events
+- `proposal-api-server.mjs` - API endpoints for proposal create/accept/decline/get
 
 Run:
 
@@ -57,3 +59,7 @@ Run:
 `PFT_TASKNODE_JWT="<jwt>" node src/query-server.mjs`
 
 `node --test src/test-double-opt-in.mjs`
+
+`PFT_TASKNODE_JWT="<jwt>" PFT_PROPOSAL_STORE_PATH="data/proposal-events.json" node src/proposal-api-server.mjs`
+
+`node --test src/test-proposal-e2e.mjs`

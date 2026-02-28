@@ -70,6 +70,8 @@ The Routing Agent includes a Task Node API client and ingestion script:
 - `src/on-demand-query.mjs`
 - `src/query-server.mjs`
 - `src/double-opt-in.mjs`
+- `src/proposal-service.mjs`
+- `src/proposal-api-server.mjs`
 
 ### Required environment variables
 
@@ -88,6 +90,8 @@ The Routing Agent includes a Task Node API client and ingestion script:
 - `PFT_FEEDBACK_MEMORY_PATH` (optional): feedback memory store path used by ingestion + matcher
 - `PFT_FEEDBACK_OPERATOR_ID` (optional): explicit operator ID to attribute terminal outcomes to
 - `PFT_QUERY_PORT` (optional): on-demand query server port, default `8790`
+- `PFT_PROPOSAL_API_PORT` (optional): proposal API server port, default `8791`
+- `PFT_PROPOSAL_STORE_PATH` (optional): durable event store path for proposal lifecycle
 - `PFT_INTEGRITY_BLOCKED_OPERATOR_IDS` (optional): comma-separated hard-block operator IDs
 - `PFT_INTEGRITY_BLOCKED_WALLETS` (optional): comma-separated hard-block wallet addresses
 - `PFT_INTEGRITY_UNAUTHORIZED_OPERATOR_IDS` (optional): comma-separated unauthorized operator IDs
@@ -172,6 +176,29 @@ Example request:
 Run tests:
 
 `node --test src/test-double-opt-in.mjs`
+
+### Durable Proposal API layer
+
+Bridges on-demand matching with double opt-in handshakes using a durable event store.
+
+- Service module: `src/proposal-service.mjs`
+- API server: `src/proposal-api-server.mjs`
+- Durable store: `data/proposal-events.json` (default; configurable)
+- E2E test: `src/test-proposal-e2e.mjs`
+
+Run server:
+
+`PFT_TASKNODE_JWT="<jwt>" node src/proposal-api-server.mjs`
+
+Endpoints:
+- `POST /proposals` -> creates proposal from query output
+- `POST /proposals/:id/accept` -> requester/operator signed acceptance
+- `POST /proposals/:id/decline` -> decline transition
+- `GET /proposals/:id` -> derived state + full event history
+
+Run E2E test:
+
+`node --test src/test-proposal-e2e.mjs`
 
 ### End-to-end dry-run integration
 
