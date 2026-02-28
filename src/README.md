@@ -63,3 +63,5 @@ Run:
 `PFT_TASKNODE_JWT="<jwt>" PFT_PROPOSAL_STORE_PATH="data/proposal-events.json" node src/proposal-api-server.mjs`
 
 `node --test src/test-proposal-e2e.mjs`
+
+`node --test src/test-proposal-hardening.mjs`

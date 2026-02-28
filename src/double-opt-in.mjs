@@ -166,13 +166,13 @@ function assertValidStatus(status) {
   }
 }
 
-function assertNotExpired(proposal, nowIso) {
+function assertNotExpired(proposal, nowIso, clockSkewMs = 0) {
   if (!proposal?.expires_at) {
     throw new Error("Proposal missing expires_at.");
   }
   const now = new Date(nowIso).getTime();
   const exp = new Date(proposal.expires_at).getTime();
-  if (now > exp) {
+  if (now - clockSkewMs > exp) {
     throw new Error("Proposal is expired.");
   }
 }
@@ -202,6 +202,7 @@ function allowedNextEventTypes(state) {
 
 export function applyHandshakeEvent(store, event, options = {}) {
   const nowIso = toIso(options.now || new Date().toISOString()) || new Date().toISOString();
+  const allowedClockSkewMs = Math.max(0, Number(options.allowedClockSkewMs || 0));
   const incoming = {
     event_id: toString(event?.event_id).trim(),
     proposal_id: toString(event?.proposal_id).trim(),
@@ -214,6 +215,11 @@ export function applyHandshakeEvent(store, event, options = {}) {
   if (!incoming.event_id) throw new Error("event_id is required");
   if (!incoming.proposal_id) throw new Error("proposal_id is required");
   if (!incoming.type) throw new Error("type is required");
+  const incomingTs = new Date(incoming.occurred_at).getTime();
+  const nowTs = new Date(nowIso).getTime();
+  if (incomingTs > nowTs + allowedClockSkewMs) {
+    throw new Error("Event timestamp is too far in the future.");
+  }
 
   if (store.event_ids.has(incoming.event_id)) {
     const proposal = store.proposals[incoming.proposal_id];
@@ -265,11 +271,11 @@ export function applyHandshakeEvent(store, event, options = {}) {
   if (incoming.type === "proposal.expired") {
     const exp = new Date(proposal.expires_at).getTime();
     const now = new Date(nowIso).getTime();
-    if (now < exp) throw new Error("Proposal has not expired yet.");
+    if (now + allowedClockSkewMs < exp) throw new Error("Proposal has not expired yet.");
   }
 
   if (incoming.type === "proposal.requester_accepted" || incoming.type === "proposal.operator_accepted") {
-    assertNotExpired(proposal, nowIso);
+    assertNotExpired(proposal, nowIso, allowedClockSkewMs);
 
     const signerType =
       incoming.type === "proposal.requester_accepted" ? "requester" : "operator";

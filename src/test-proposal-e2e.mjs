@@ -74,7 +74,7 @@ test("e2e proposal flow: query -> proposed -> dual acceptance -> locked", async 
   assert.equal(proposed.proposal.operator_id, operatorId);
 
   const requesterSignature = signProposalHash(proposed.proposal_hash, requesterKeys.privateKeyPem);
-  const afterRequesterAccept = serviceA.acceptProposal(proposed.proposal.proposal_id, {
+  const afterRequesterAccept = await serviceA.acceptProposal(proposed.proposal.proposal_id, {
     actor_id: requesterId,
     proposal_hash: proposed.proposal_hash,
     signature: requesterSignature,
@@ -84,11 +84,11 @@ test("e2e proposal flow: query -> proposed -> dual acceptance -> locked", async 
 
   // Simulate restart: rehydrate from durable event store and continue flow.
   const serviceB = new ProposalService({ storePath, queryRunner });
-  const reloaded = serviceB.getProposal(proposed.proposal.proposal_id);
+  const reloaded = await serviceB.getProposal(proposed.proposal.proposal_id);
   assert.equal(reloaded.state.status, "requester_accepted");
 
   const operatorSignature = signProposalHash(reloaded.proposal_hash, operatorKeys.privateKeyPem);
-  const locked = serviceB.acceptProposal(proposed.proposal.proposal_id, {
+  const locked = await serviceB.acceptProposal(proposed.proposal.proposal_id, {
     actor_id: operatorId,
     proposal_hash: reloaded.proposal_hash,
     signature: operatorSignature,

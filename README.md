@@ -92,6 +92,13 @@ The Routing Agent includes a Task Node API client and ingestion script:
 - `PFT_QUERY_PORT` (optional): on-demand query server port, default `8790`
 - `PFT_PROPOSAL_API_PORT` (optional): proposal API server port, default `8791`
 - `PFT_PROPOSAL_STORE_PATH` (optional): durable event store path for proposal lifecycle
+- `PFT_PROPOSAL_AUTH_TOKENS` (optional): JSON map of `actor_id -> bearer token` for endpoint auth
+- `PFT_PROPOSAL_ACTOR_PUBLIC_KEYS` (optional): JSON map of `actor_id -> public key PEM` (supports `\\n`)
+- `PFT_PROPOSAL_REQUIRE_REGISTERED_KEYS` (optional): require actor key registry for signature verification
+- `PFT_PROPOSAL_CLOCK_SKEW_MS` (optional): clock skew tolerance for expiry/timestamp checks, default `5000`
+- `PFT_PROPOSAL_LOCK_TIMEOUT_MS` / `PFT_PROPOSAL_LOCK_POLL_MS` / `PFT_PROPOSAL_LOCK_STALE_MS` (optional): multi-instance file lock controls
+- `PFT_PROPOSAL_ALERT_INTERVAL_MS` (optional): background stuck-proposal scan interval
+- `PFT_PROPOSAL_STUCK_AFTER_MS` / `PFT_PROPOSAL_EXPIRING_WITHIN_MS` (optional): alert thresholds
 - `PFT_INTEGRITY_BLOCKED_OPERATOR_IDS` (optional): comma-separated hard-block operator IDs
 - `PFT_INTEGRITY_BLOCKED_WALLETS` (optional): comma-separated hard-block wallet addresses
 - `PFT_INTEGRITY_UNAUTHORIZED_OPERATOR_IDS` (optional): comma-separated unauthorized operator IDs
@@ -195,10 +202,15 @@ Endpoints:
 - `POST /proposals/:id/accept` -> requester/operator signed acceptance
 - `POST /proposals/:id/decline` -> decline transition
 - `GET /proposals/:id` -> derived state + full event history
+- `GET /alerts/stuck` -> current stuck/timeout alert candidates
 
 Run E2E test:
 
 `node --test src/test-proposal-e2e.mjs`
+
+Run production-hardening edge-case tests:
+
+`node --test src/test-proposal-hardening.mjs`
 
 ### End-to-end dry-run integration
 

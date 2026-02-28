@@ -24,6 +24,20 @@ function asObject(value) {
   return value && typeof value === "object" && !Array.isArray(value) ? value : {};
 }
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function normalizePem(value) {
+  const raw = toString(value).trim();
+  if (!raw) return "";
+  if (raw.startsWith("base64:")) {
+    const decoded = Buffer.from(raw.slice("base64:".length), "base64").toString("utf8");
+    return decoded;
+  }
+  return raw.replace(/\\n/g, "\n");
+}
+
 function emptyPersistentStore() {
   return {
     schema_version: "1.0",
@@ -105,11 +119,24 @@ export class ProposalService {
     storePath,
     queryRunner = runOnDemandQuery,
     telemetry = null,
+    actorPublicKeys = {},
+    requireRegisteredKeys = false,
+    clockSkewMs = 5000,
+    lockTimeoutMs = 5000,
+    lockPollMs = 50,
+    lockStaleMs = 30000,
   } = {}) {
     if (!storePath) throw new Error("storePath is required");
     this.storePath = storePath;
+    this.lockPath = `${storePath}.lock`;
     this.queryRunner = queryRunner;
     this.telemetry = telemetry || createTelemetryEmitterFromEnv();
+    this.actorPublicKeys = { ...actorPublicKeys };
+    this.requireRegisteredKeys = Boolean(requireRegisteredKeys);
+    this.clockSkewMs = Math.max(0, Number(clockSkewMs) || 0);
+    this.lockTimeoutMs = Math.max(500, Number(lockTimeoutMs) || 5000);
+    this.lockPollMs = Math.max(10, Number(lockPollMs) || 50);
+    this.lockStaleMs = Math.max(1000, Number(lockStaleMs) || 30000);
   }
 
   load() {
@@ -126,6 +153,48 @@ export class ProposalService {
       severity: "info",
       payload,
     });
+  }
+
+  async withStoreLock(fn) {
+    const start = Date.now();
+    fs.mkdirSync(path.dirname(this.lockPath), { recursive: true });
+    while (true) {
+      try {
+        const fd = fs.openSync(this.lockPath, "wx");
+        fs.writeFileSync(fd, JSON.stringify({ pid: process.pid, started_at: new Date().toISOString() }));
+        try {
+          return await fn();
+        } finally {
+          try {
+            fs.closeSync(fd);
+          } catch {
+            // no-op
+          }
+          try {
+            fs.unlinkSync(this.lockPath);
+          } catch {
+            // no-op
+          }
+        }
+      } catch (error) {
+        if (error?.code !== "EEXIST") throw error;
+        try {
+          const stat = fs.statSync(this.lockPath);
+          if (Date.now() - stat.mtimeMs > this.lockStaleMs) {
+            fs.unlinkSync(this.lockPath);
+            continue;
+          }
+        } catch {
+          // lock might have been released between checks
+          continue;
+        }
+
+        if (Date.now() - start > this.lockTimeoutMs) {
+          throw new Error("Timed out waiting for proposal store lock.");
+        }
+        await sleep(this.lockPollMs);
+      }
+    }
   }
 
   createProposalPayload({ requesterId, operatorMatch, queryResult, expiresInSeconds, nonce, proposalId }) {
@@ -184,72 +253,90 @@ export class ProposalService {
       proposalId: body.proposal_id,
     });
 
-    const persistent = this.load();
-    const handshake = persistentToHandshakeStore(persistent);
-    const proposedEvent = {
-      event_id: toString(body.event_id || randomUUID()),
-      proposal_id: proposal.proposal_id,
-      type: "proposal.proposed",
-      actor_id: "system",
-      occurred_at: new Date().toISOString(),
-      payload: { proposal },
-    };
-    const result = applyHandshakeEvent(handshake, proposedEvent);
-    const nextPersistent = handshakeToPersistentStore(handshake, persistent);
-    this.save(nextPersistent);
+    const resultView = await this.withStoreLock(async () => {
+      const persistent = this.load();
+      const handshake = persistentToHandshakeStore(persistent);
+      const proposedEvent = {
+        event_id: toString(body.event_id || randomUUID()),
+        proposal_id: proposal.proposal_id,
+        type: "proposal.proposed",
+        actor_id: "system",
+        occurred_at: new Date().toISOString(),
+        payload: { proposal },
+      };
+      const result = applyHandshakeEvent(handshake, proposedEvent, {
+        allowedClockSkewMs: this.clockSkewMs,
+      });
+      const nextPersistent = handshakeToPersistentStore(handshake, persistent);
+      this.save(nextPersistent);
+      const events = handshake.events_by_proposal[proposal.proposal_id] || [];
+      return {
+        result,
+        view: formatProposalView(proposal, events),
+      };
+    });
 
     this.emitLifecycle("proposal.created", {
       proposal_id: proposal.proposal_id,
       requester_id: proposal.requester_id,
       operator_id: proposal.operator_id,
       task_id: proposal.task_id,
-      status: result.state.status,
+      status: resultView.result.state.status,
     });
 
-    const events = handshake.events_by_proposal[proposal.proposal_id] || [];
-    return formatProposalView(proposal, events);
+    return resultView.view;
   }
 
-  applyTransition(proposalId, event) {
+  async applyTransition(proposalId, event) {
     const id = toString(proposalId).trim();
     if (!id) throw new Error("proposal id is required");
 
-    const persistent = this.load();
-    const handshake = persistentToHandshakeStore(persistent);
-    const proposal = handshake.proposals[id];
-    if (!proposal) {
-      const error = new Error("Proposal not found.");
-      error.code = "NOT_FOUND";
-      throw error;
-    }
-    const events = handshake.events_by_proposal[id] || [];
-    const state = buildHandshakeState(events, proposal);
-    if (isTerminalStatus(state.status) && event.type !== "proposal.expired") {
-      throw new Error(`Cannot transition terminal proposal state: ${state.status}`);
-    }
+    const wrapped = await this.withStoreLock(async () => {
+      const persistent = this.load();
+      const handshake = persistentToHandshakeStore(persistent);
+      const proposal = handshake.proposals[id];
+      if (!proposal) {
+        const error = new Error("Proposal not found.");
+        error.code = "NOT_FOUND";
+        throw error;
+      }
+      const events = handshake.events_by_proposal[id] || [];
+      const state = buildHandshakeState(events, proposal);
+      if (isTerminalStatus(state.status) && event.type !== "proposal.expired") {
+        throw new Error(`Cannot transition terminal proposal state: ${state.status}`);
+      }
 
-    const result = applyHandshakeEvent(handshake, {
-      ...event,
-      proposal_id: id,
-      event_id: toString(event.event_id || randomUUID()),
-      occurred_at: event.occurred_at || new Date().toISOString(),
+      const result = applyHandshakeEvent(
+        handshake,
+        {
+          ...event,
+          proposal_id: id,
+          event_id: toString(event.event_id || randomUUID()),
+          occurred_at: event.occurred_at || new Date().toISOString(),
+        },
+        { allowedClockSkewMs: this.clockSkewMs }
+      );
+      const nextPersistent = handshakeToPersistentStore(handshake, persistent);
+      this.save(nextPersistent);
+      const proposalEvents = handshake.events_by_proposal[id] || [];
+      return {
+        result,
+        view: formatProposalView(proposal, proposalEvents),
+      };
     });
-    const nextPersistent = handshakeToPersistentStore(handshake, persistent);
-    this.save(nextPersistent);
 
     this.emitLifecycle("proposal.lifecycle_event", {
       proposal_id: id,
       type: event.type,
       actor_id: event.actor_id || null,
-      status: result.state?.status || null,
-      idempotent: Boolean(result.idempotent),
+      status: wrapped.result.state?.status || null,
+      idempotent: Boolean(wrapped.result.idempotent),
     });
 
-    const proposalEvents = handshake.events_by_proposal[id] || [];
-    return formatProposalView(proposal, proposalEvents);
+    return wrapped.view;
   }
 
-  acceptProposal(proposalId, input) {
+  async acceptProposal(proposalId, input) {
     const body = asObject(input);
     const actorId = toString(body.actor_id).trim();
     if (!actorId) throw new Error("actor_id is required");
@@ -270,18 +357,27 @@ export class ProposalService {
           : null;
     if (!type) throw new Error("actor_id must match requester_id or operator_id");
 
+    const registeredPublicKey = normalizePem(this.actorPublicKeys[actorId] || "");
+    if (this.requireRegisteredKeys && !registeredPublicKey) {
+      throw new Error("Actor does not have a registered public key.");
+    }
+    const publicKey = registeredPublicKey || normalizePem(body.public_key);
+    if (!publicKey) {
+      throw new Error("public_key is required.");
+    }
+
     return this.applyTransition(proposalId, {
       type,
       actor_id: actorId,
       payload: {
         proposal_hash: toString(body.proposal_hash),
         signature: toString(body.signature),
-        public_key: toString(body.public_key),
+        public_key: publicKey,
       },
     });
   }
 
-  declineProposal(proposalId, input) {
+  async declineProposal(proposalId, input) {
     const body = asObject(input);
     const actorId = toString(body.actor_id).trim();
     if (!actorId) throw new Error("actor_id is required");
@@ -294,47 +390,101 @@ export class ProposalService {
     });
   }
 
-  getProposal(proposalId) {
+  async getProposal(proposalId) {
     const id = toString(proposalId).trim();
+    const wrapped = await this.withStoreLock(async () => {
+      const persistent = this.load();
+      const handshake = persistentToHandshakeStore(persistent);
+      const proposal = handshake.proposals[id];
+      if (!proposal) {
+        const error = new Error("Proposal not found.");
+        error.code = "NOT_FOUND";
+        throw error;
+      }
+
+      let events = handshake.events_by_proposal[id] || [];
+      let state = buildHandshakeState(events, proposal);
+      if (
+        !isTerminalStatus(state.status) &&
+        Date.now() - this.clockSkewMs > new Date(proposal.expires_at).getTime()
+      ) {
+        const result = applyHandshakeEvent(
+          handshake,
+          {
+            event_id: randomUUID(),
+            proposal_id: id,
+            type: "proposal.expired",
+            actor_id: "system",
+            occurred_at: new Date().toISOString(),
+            payload: {},
+          },
+          { allowedClockSkewMs: this.clockSkewMs }
+        );
+        const nextPersistent = handshakeToPersistentStore(handshake, persistent);
+        this.save(nextPersistent);
+        events = handshake.events_by_proposal[id] || [];
+        state = result.state || buildHandshakeState(events, proposal);
+        this.emitLifecycle("proposal.lifecycle_event", {
+          proposal_id: id,
+          type: "proposal.expired",
+          actor_id: "system",
+          status: state.status,
+        });
+      }
+
+      return {
+        proposal,
+        proposal_hash: hashProposalPayload(proposal),
+        state,
+        events: [...events].sort(
+          (a, b) => new Date(a.occurred_at).getTime() - new Date(b.occurred_at).getTime()
+        ),
+      };
+    });
+    return wrapped;
+  }
+
+  async scanStuckProposals({ stuckAfterMs = 10 * 60 * 1000, expiringWithinMs = 2 * 60 * 1000 } = {}) {
     const persistent = this.load();
     const handshake = persistentToHandshakeStore(persistent);
-    const proposal = handshake.proposals[id];
-    if (!proposal) {
-      const error = new Error("Proposal not found.");
-      error.code = "NOT_FOUND";
-      throw error;
-    }
+    const now = Date.now();
+    const alerts = [];
 
-    let events = handshake.events_by_proposal[id] || [];
-    let state = buildHandshakeState(events, proposal);
-    if (!isTerminalStatus(state.status) && Date.now() > new Date(proposal.expires_at).getTime()) {
-      const result = applyHandshakeEvent(handshake, {
-        event_id: randomUUID(),
-        proposal_id: id,
-        type: "proposal.expired",
-        actor_id: "system",
-        occurred_at: new Date().toISOString(),
-        payload: {},
-      });
-      const nextPersistent = handshakeToPersistentStore(handshake, persistent);
-      this.save(nextPersistent);
-      events = handshake.events_by_proposal[id] || [];
-      state = result.state || buildHandshakeState(events, proposal);
-      this.emitLifecycle("proposal.lifecycle_event", {
-        proposal_id: id,
-        type: "proposal.expired",
-        actor_id: "system",
+    for (const [proposalId, proposal] of Object.entries(handshake.proposals)) {
+      const events = handshake.events_by_proposal[proposalId] || [];
+      if (!events.length) continue;
+      const state = buildHandshakeState(events, proposal);
+      if (isTerminalStatus(state.status)) continue;
+
+      const lastEventTs = new Date(state.last_event_at || events[events.length - 1].occurred_at).getTime();
+      const expiresTs = new Date(proposal.expires_at).getTime();
+      const stale = now - lastEventTs > stuckAfterMs;
+      const expiring = expiresTs - now <= expiringWithinMs;
+      if (!stale && !expiring) continue;
+
+      const alert = {
+        proposal_id: proposalId,
         status: state.status,
+        requester_id: proposal.requester_id,
+        operator_id: proposal.operator_id,
+        expires_at: proposal.expires_at,
+        last_event_at: state.last_event_at,
+        stale,
+        expiring_soon: expiring,
+      };
+      alerts.push(alert);
+      this.telemetry?.emit({
+        event_type: stale ? "proposal.stuck_detected" : "proposal.timeout_warning",
+        severity: stale ? "warn" : "info",
+        payload: alert,
       });
     }
 
     return {
-      proposal,
-      proposal_hash: hashProposalPayload(proposal),
-      state,
-      events: [...events].sort(
-        (a, b) => new Date(a.occurred_at).getTime() - new Date(b.occurred_at).getTime()
-      ),
+      ok: true,
+      generated_at: new Date().toISOString(),
+      alert_count: alerts.length,
+      alerts,
     };
   }
 }
@@ -344,9 +494,33 @@ export function createProposalServiceFromEnv(options = {}) {
     options.storePath ||
     process.env.PFT_PROPOSAL_STORE_PATH ||
     path.resolve(process.cwd(), "data", "proposal-events.json");
+  const actorPublicKeys = asObject(options.actorPublicKeys || {});
+  const envActorKeys = asObject(
+    process.env.PFT_PROPOSAL_ACTOR_PUBLIC_KEYS
+      ? JSON.parse(process.env.PFT_PROPOSAL_ACTOR_PUBLIC_KEYS)
+      : {}
+  );
+  const mergedActorKeys = { ...envActorKeys, ...actorPublicKeys };
+
   return new ProposalService({
     storePath,
     queryRunner: options.queryRunner || runOnDemandQuery,
     telemetry: options.telemetry || createTelemetryEmitterFromEnv(),
+    actorPublicKeys: mergedActorKeys,
+    requireRegisteredKeys:
+      options.requireRegisteredKeys ??
+      String(process.env.PFT_PROPOSAL_REQUIRE_REGISTERED_KEYS || "").toLowerCase() === "true",
+    clockSkewMs:
+      options.clockSkewMs ??
+      Math.max(0, Number(process.env.PFT_PROPOSAL_CLOCK_SKEW_MS || 5000)),
+    lockTimeoutMs:
+      options.lockTimeoutMs ??
+      Math.max(500, Number(process.env.PFT_PROPOSAL_LOCK_TIMEOUT_MS || 5000)),
+    lockPollMs:
+      options.lockPollMs ??
+      Math.max(10, Number(process.env.PFT_PROPOSAL_LOCK_POLL_MS || 50)),
+    lockStaleMs:
+      options.lockStaleMs ??
+      Math.max(1000, Number(process.env.PFT_PROPOSAL_LOCK_STALE_MS || 30000)),
   });
 }

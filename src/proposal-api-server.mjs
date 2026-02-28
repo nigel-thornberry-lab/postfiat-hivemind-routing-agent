@@ -38,11 +38,59 @@ function parsePath(urlPath) {
   const matchGet = clean.match(/^\/proposals\/([^/]+)$/);
   if (matchGet) return { route: "get", proposalId: decodeURIComponent(matchGet[1]) };
   if (clean === "/proposals") return { route: "create" };
+  if (clean === "/alerts/stuck") return { route: "alerts" };
   if (clean === "/health") return { route: "health" };
   return { route: "unknown" };
 }
 
+function parseAuthRegistry() {
+  const raw = process.env.PFT_PROPOSAL_AUTH_TOKENS;
+  if (!raw) return {};
+  try {
+    const parsed = JSON.parse(raw);
+    return parsed && typeof parsed === "object" ? parsed : {};
+  } catch {
+    throw new Error("Invalid PFT_PROPOSAL_AUTH_TOKENS JSON.");
+  }
+}
+
+function authenticateRequest(req, authRegistry) {
+  const keys = Object.keys(authRegistry);
+  if (!keys.length) return { actor_id: null, auth_enabled: false };
+  const header = String(req.headers.authorization || "");
+  if (!header.startsWith("Bearer ")) {
+    const error = new Error("Missing bearer token.");
+    error.http_status = 401;
+    throw error;
+  }
+  const token = header.slice("Bearer ".length).trim();
+  const actorId = keys.find((candidate) => authRegistry[candidate] === token);
+  if (!actorId) {
+    const error = new Error("Unauthorized token.");
+    error.http_status = 401;
+    throw error;
+  }
+  return { actor_id: actorId, auth_enabled: true };
+}
+
+function assertActorBinding(auth, expectedActorId, { allowSystem = false } = {}) {
+  if (!auth.auth_enabled) return;
+  const actor = String(auth.actor_id || "");
+  if (!actor) {
+    const error = new Error("Authenticated actor is missing.");
+    error.http_status = 401;
+    throw error;
+  }
+  if (allowSystem && (actor === "system" || actor === "admin")) return;
+  if (actor !== String(expectedActorId || "")) {
+    const error = new Error("Authenticated actor does not match payload actor.");
+    error.http_status = 403;
+    throw error;
+  }
+}
+
 function errorStatus(error) {
+  if (Number(error?.http_status)) return Number(error.http_status);
   const message = String(error?.message || "");
   const code = String(error?.code || "");
   if (code === "NOT_FOUND" || message.includes("not found")) return 404;
@@ -61,40 +109,59 @@ function errorStatus(error) {
 
 async function main() {
   const service = createProposalServiceFromEnv();
+  const authRegistry = parseAuthRegistry();
   const port = Number(process.env.PFT_PROPOSAL_API_PORT || DEFAULT_PORT);
+  const alertIntervalMs = Math.max(0, Number(process.env.PFT_PROPOSAL_ALERT_INTERVAL_MS || 0));
+  const stuckAfterMs = Math.max(1000, Number(process.env.PFT_PROPOSAL_STUCK_AFTER_MS || 600000));
+  const expiringWithinMs = Math.max(
+    1000,
+    Number(process.env.PFT_PROPOSAL_EXPIRING_WITHIN_MS || 120000)
+  );
 
   const server = http.createServer(async (req, res) => {
     const { route, proposalId } = parsePath(req.url);
 
     try {
       if (req.method === "GET" && route === "health") {
+        const authEnabled = Object.keys(authRegistry).length > 0;
         return sendJson(res, 200, {
           ok: true,
           service: "proposal-api",
           status: "ready",
+          auth_enabled: authEnabled,
         });
       }
 
+      const auth = authenticateRequest(req, authRegistry);
+
       if (req.method === "POST" && route === "create") {
         const payload = await parseBody(req);
+        assertActorBinding(auth, payload.requester_id, { allowSystem: true });
         const result = await service.createProposalFromQuery(payload);
         return sendJson(res, 201, { ok: true, ...result });
       }
 
       if (req.method === "POST" && route === "accept") {
         const payload = await parseBody(req);
-        const result = service.acceptProposal(proposalId, payload);
+        assertActorBinding(auth, payload.actor_id, { allowSystem: false });
+        const result = await service.acceptProposal(proposalId, payload);
         return sendJson(res, 200, { ok: true, ...result });
       }
 
       if (req.method === "POST" && route === "decline") {
         const payload = await parseBody(req);
-        const result = service.declineProposal(proposalId, payload);
+        assertActorBinding(auth, payload.actor_id, { allowSystem: false });
+        const result = await service.declineProposal(proposalId, payload);
         return sendJson(res, 200, { ok: true, ...result });
       }
 
+      if (req.method === "GET" && route === "alerts") {
+        const result = await service.scanStuckProposals({ stuckAfterMs, expiringWithinMs });
+        return sendJson(res, 200, result);
+      }
+
       if (req.method === "GET" && route === "get") {
-        const result = service.getProposal(proposalId);
+        const result = await service.getProposal(proposalId);
         return sendJson(res, 200, { ok: true, ...result });
       }
 
@@ -110,7 +177,23 @@ async function main() {
     console.log(`[proposal-api] POST /proposals/:id/accept`);
     console.log(`[proposal-api] POST /proposals/:id/decline`);
     console.log(`[proposal-api] GET /proposals/:id`);
+    console.log(`[proposal-api] GET /alerts/stuck`);
   });
+
+  if (alertIntervalMs > 0) {
+    setInterval(() => {
+      service
+        .scanStuckProposals({ stuckAfterMs, expiringWithinMs })
+        .then((result) => {
+          if (result.alert_count > 0) {
+            console.warn(`[proposal-api] stuck/timeout alerts: ${result.alert_count}`);
+          }
+        })
+        .catch((error) => {
+          console.error(`[proposal-api] alert scan error: ${error.message}`);
+        });
+    }, alertIntervalMs).unref();
+  }
 }
 
 main().catch((error) => {
